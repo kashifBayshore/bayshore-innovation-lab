@@ -75,7 +75,7 @@ const LabCapabilitiesSection: React.FC = () => {
   ];
 
   return (
-    <Section background={figmaColors.backgroundWhite} size="sm" style={{ overflow: "hidden", minHeight: "500px" }}>
+    <Section background={figmaColors.backgroundPrimary} size="sm" style={{ overflow: "hidden", minHeight: "500px" }}>
        <div
         style={{
           maxWidth: figmaSpacing.container.full,
