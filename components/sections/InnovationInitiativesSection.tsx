@@ -11,7 +11,7 @@ import { Text } from "@/components/ui/Text";
 
 const InnovationInitiativesSection: React.FC = () => {
   return (
-    <Section background={figmaColors.backgroundWhite} noPadding style={{ position: "relative", overflow: "hidden", padding: "0px 0 10px 0" }}>
+    <Section background={figmaColors.backgroundWhite} noPadding style={{ position: "relative", overflow: "visible", padding: "20px 0" }}>
       <div
         style={{
           maxWidth: figmaSpacing.container.full,
@@ -21,7 +21,7 @@ const InnovationInitiativesSection: React.FC = () => {
           position: "relative",
           zIndex: 1,
           gap: "40px",
-          minHeight: "400px",
+          height: "450px", // Reduced section height
         }}
         className="flex-col md:flex-row items-center"
       >
@@ -34,15 +34,19 @@ const InnovationInitiativesSection: React.FC = () => {
             alignItems: "center",
             width: "100%",
             position: "relative",
+            height: "100%",
           }}
           className="order-2 md:order-1"
         >
           <div
             style={{
-              position: "relative",
+              position: "absolute",
               width: "100%", 
               maxWidth: "650px",
-              height: "600px", 
+              height: "600px", // STRICTLY UNCHANGED
+              top: "50%",
+              left: 0,
+              transform: "translateY(-50%)",
             }}
           >
             <Image
@@ -63,7 +67,7 @@ const InnovationInitiativesSection: React.FC = () => {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            minHeight: "400px",
+            height: "100%",
             zIndex: 10,
           }}
           className="order-1 md:order-2 px-4 md:px-0 md:absolute md:left-1/2 md:-translate-x-1/2 md:w-full"
