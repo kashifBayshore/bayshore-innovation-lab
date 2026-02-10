@@ -21,7 +21,7 @@ const InnovationInitiativesSection: React.FC = () => {
           position: "relative",
           zIndex: 1,
           gap: "40px",
-          minHeight: "400px",
+          minHeight: "500px",
         }}
         className="flex-col md:flex-row items-center"
       >
@@ -55,18 +55,18 @@ const InnovationInitiativesSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Right Side - Content Container (Centered & Middle) */}
+        {/* Right Side - Content Container (Centered Globally on Desktop) */}
         <div
           style={{
             flex: "1",
             display: "flex",
             flexDirection: "column",
-            justifyContent: "center", // Vertical centering within the flex item
-            alignItems: "center", // Horizontal centering within the flex item
+            justifyContent: "center",
+            alignItems: "center",
             minHeight: "500px",
             zIndex: 10,
           }}
-          className="order-1 md:order-2 px-4 md:px-0" // Removed md:px-10 for cleaner centering
+          className="order-1 md:order-2 px-4 md:px-0 md:absolute md:left-1/2 md:-translate-x-1/2"
         >
           {/* Unified Content Block - Precisely Centered */}
           <div 
