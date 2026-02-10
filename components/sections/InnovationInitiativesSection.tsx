@@ -16,7 +16,7 @@ const InnovationInitiativesSection: React.FC = () => {
         style={{
           maxWidth: figmaSpacing.container.full,
           margin: "0 auto",
-          padding: "0 20px",
+          padding: "0 20px", 
           display: "flex",
           position: "relative",
           zIndex: 1,
@@ -40,10 +40,9 @@ const InnovationInitiativesSection: React.FC = () => {
           <div
             style={{
               position: "relative",
-              width: "120%", // Allow it to be wider than the column
+              width: "100%", 
               maxWidth: "650px",
               height: "600px", 
-              left: "-50px", // Pull it slightly left
             }}
           >
             <Image
