@@ -56,29 +56,71 @@ const ResearchAreasSection: React.FC = () => {
           padding: "0 20px",
         }}
       >
-        {/* Heading Area with Decorative Line */}
-        <div style={{ marginBottom: "40px", position: "relative", display: "flex", alignItems: "center" }}>
-          <Heading level={2} gradient style={{ marginRight: "20px", whiteSpace: "nowrap" }}>
+        {/* Heading Area with Decorative Stepped Line */}
+        <div style={{ 
+          marginBottom: "64px", 
+          display: "flex", 
+          alignItems: "center", 
+          gap: "24px",
+          width: "100%"
+        }}>
+          <Heading 
+            level={2} 
+            gradient 
+            style={{ 
+              fontSize: "clamp(32px, 4vw, 42px)",
+              margin: 0,
+              whiteSpace: "nowrap" 
+            }}
+          >
             Research Areas
           </Heading>
           
-          {/* Decorative Line (Rectangle 35.svg) */}
-          <div style={{ flex: 1, height: "auto", position: "relative", top: "5px" }}>
-             <Image
-                src="/Rectangle 35.svg"
-                alt="Decorative Line"
-                width={800} // Approximate width to fill space
-                height={20}
-                style={{ width: "100%", height: "auto" }}
-                unoptimized
-             />
+          {/* Decorative Line with Terminal Node */}
+          <div style={{ flex: 1, position: "relative", height: "64px", top: "14px" }}>
+            <svg
+              width="100%"
+              height="64"
+              viewBox="0 0 863 64"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              preserveAspectRatio="xMinYMin meet"
+            >
+              <path
+                d="M1 1L704 1.00083C712.837 1.00084 720 8.16428 720 17.0008L720 40.0009C720 48.8374 727.163 56.0008 736 56.0009L862 56.0016"
+                stroke="url(#paint0_linear_header)"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+              {/* Terminal Node Dot */}
+              <circle cx="862" cy="56" r="4.5" fill="#03C5CE" />
+              <circle cx="862" cy="56" r="8" fill="#03C5CE" fillOpacity="0.2" /> {/* Subtle Glow/Outer Node */}
+              
+              <defs>
+                <linearGradient
+                  id="paint0_linear_header"
+                  x1="-4"
+                  y1="1.0027"
+                  x2="883"
+                  y2="1.00274"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stopColor="white" stopOpacity="0" />
+                  <stop offset="0.1" stopColor="white" />
+                  <stop offset="0.3" stopColor="#FF8D02" />
+                  <stop offset="0.6" stopColor="#03C5CE" />
+                  <stop offset="0.9" stopColor="#03C5CE" />
+                  <stop offset="1" stopColor="white" stopOpacity="0" />
+                </linearGradient>
+              </defs>
+            </svg>
           </div>
         </div>
 
         <div
-          className="grid grid-cols-1 md:grid-cols-2 gap-x-[80px] gap-y-[60px]"
+          className="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-20"
           style={{
-            maxWidth: "1200px",
+            maxWidth: "1272px",
             margin: "0 auto",
           }}
         >
@@ -88,15 +130,13 @@ const ResearchAreasSection: React.FC = () => {
               style={{
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "flex-start",
-                // Removed bg, border, shadow to match the clean "text on white" look of the screenshot
+                gap: "24px",
               }}
             >
               <div
                 style={{
-                  width: "48px",
-                  height: "48px",
-                  marginBottom: "24px",
+                  width: "56px",
+                  height: "56px",
                   position: "relative",
                 }}
               >
@@ -105,16 +145,34 @@ const ResearchAreasSection: React.FC = () => {
                   alt={area.title}
                   fill
                   style={{ objectFit: "contain" }}
+                  unoptimized
                 />
               </div>
 
-              <Heading level={3} style={{ marginBottom: "16px", fontSize: "24px", color: figmaColors.textPrimary }}>
-                {area.title}
-              </Heading>
-
-              <Text size="sm" color="secondary" style={{ lineHeight: "1.6", color: "#6B7280" }}>
-                {area.description}
-              </Text>
+              <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+                <h3
+                  style={{
+                    fontFamily: "'Open Sans', sans-serif",
+                    fontSize: "24px",
+                    fontWeight: "700",
+                    color: figmaColors.textPrimary,
+                    margin: 0,
+                  }}
+                >
+                  {area.title}
+                </h3>
+                <Text 
+                  size="sm" 
+                  color="secondary" 
+                  style={{ 
+                    lineHeight: "1.6", 
+                    color: figmaColors.textSecondary,
+                    maxWidth: "520px"
+                  }}
+                >
+                  {area.description}
+                </Text>
+              </div>
             </div>
           ))}
         </div>
