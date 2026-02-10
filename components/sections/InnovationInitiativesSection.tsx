@@ -44,8 +44,8 @@ const InnovationInitiativesSection: React.FC = () => {
               position: "relative",
               width: "100%",
               maxWidth: "388px",
-              height: "804px", // Full height from SVG
-              maxHeight: "80vh",
+              height: "600px", 
+              maxHeight: "60vh",
             }}
           >
             <Image
@@ -66,7 +66,7 @@ const InnovationInitiativesSection: React.FC = () => {
             gap: "40px",
             zIndex: 10,
           }}
-          className="order-1 md:order-2 text-center md:text-left px-4 md:px-20"
+          className="order-1 md:order-2 text-center md:text-left px-4 md:px-10"
         >
           {/* Main Heading */}
           <Heading
@@ -76,16 +76,16 @@ const InnovationInitiativesSection: React.FC = () => {
               fontSize: "clamp(32px, 4vw, 56px)",
               lineHeight: "1.2",
               margin: 0,
-              whiteSpace: "nowrap", // ENSURING ONE LINE
+              whiteSpace: "nowrap",
             }}
           >
             Innovation Initiatives
           </Heading>
 
           {/* Feature List Container */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "48px" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
             {/* Rapid Prototyping */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
               <h3
                 style={{
                   fontFamily: figmaTypography.fontFamily.openSans.join(", "),
