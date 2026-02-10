@@ -77,31 +77,31 @@ const ResearchAreasSection: React.FC = () => {
           </Heading>
           
           {/* Decorative Line with Terminal Node */}
-          <div style={{ flex: 1, position: "relative", height: "64px", top: "14px" }}>
+          <div style={{ flex: 1, position: "relative", height: "64px", top: "24px" }}>
             <svg
               width="100%"
               height="64"
-              viewBox="0 0 863 64"
+              viewBox="0 0 1000 64"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
               preserveAspectRatio="xMinYMin meet"
             >
               <path
-                d="M1 1L704 1.00083C712.837 1.00084 720 8.16428 720 17.0008L720 40.0009C720 48.8374 727.163 56.0008 736 56.0009L862 56.0016"
+                d="M1 1L841 1.00083C849.837 1.00084 857 8.16428 857 17.0008L857 40.0009C857 48.8374 864.163 56.0008 873 56.0009L998 56.0016"
                 stroke="url(#paint0_linear_header)"
                 strokeWidth="2"
                 strokeLinecap="round"
               />
               {/* Terminal Node Dot */}
-              <circle cx="862" cy="56" r="4.5" fill="#03C5CE" />
-              <circle cx="862" cy="56" r="8" fill="#03C5CE" fillOpacity="0.2" /> {/* Subtle Glow/Outer Node */}
+              <circle cx="998" cy="56" r="4.5" fill="#03C5CE" />
+              <circle cx="998" cy="56" r="8" fill="#03C5CE" fillOpacity="0.2" /> {/* Subtle Glow/Outer Node */}
               
               <defs>
                 <linearGradient
                   id="paint0_linear_header"
                   x1="-4"
                   y1="1.0027"
-                  x2="883"
+                  x2="1020"
                   y2="1.00274"
                   gradientUnits="userSpaceOnUse"
                 >
