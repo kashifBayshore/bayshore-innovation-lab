@@ -11,7 +11,7 @@ import { Text } from "@/components/ui/Text";
 
 const InnovationInitiativesSection: React.FC = () => {
   return (
-    <Section background={figmaColors.backgroundWhite} size="sm" style={{ position: "relative", overflow: "hidden" }}>
+    <Section background={figmaColors.backgroundWhite} noPadding style={{ position: "relative", overflow: "hidden", padding: "0px 0 10px 0" }}>
       <div
         style={{
           maxWidth: figmaSpacing.container.full,
@@ -33,16 +33,17 @@ const InnovationInitiativesSection: React.FC = () => {
             justifyContent: "flex-start",
             alignItems: "center",
             width: "100%",
+            position: "relative",
           }}
           className="order-2 md:order-1"
         >
           <div
             style={{
               position: "relative",
-              width: "100%",
-              maxWidth: "388px",
-              height: "400px", 
-              maxHeight: "50vh",
+              width: "120%", // Allow it to be wider than the column
+              maxWidth: "650px",
+              height: "600px", 
+              left: "-50px", // Pull it slightly left
             }}
           >
             <Image
@@ -114,7 +115,7 @@ const InnovationInitiativesSection: React.FC = () => {
                   lineHeight: "1.6",
                   color: figmaColors.textSecondary,
                   margin: 0,
-                  maxWidth: "500px",
+                  maxWidth: "850px",
                 }}
               >
                 Fast-track development of proof-of-concepts and MVPs to validate
