@@ -192,82 +192,82 @@ export const HeroSection: React.FC = () => {
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Social Sidebar -  */}
-      <div
-        style={{
-          position: "absolute",
-          right: "40px", // Adjusted based on design visual
-          top: "50%",
-          transform: "translateY(-50%)",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "24px",
-          zIndex: 50,
-        }}
-        className="hidden xl:flex" // Only visible on large desktop
-      >
-        {/* Social Links */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "20px", alignItems: "center" }}>
-          <a href="#" style={{ color: figmaColors.accentCyan }}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
-            </svg>
-          </a>
-          <a href="#" style={{ color: figmaColors.accentCyan }}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-            </svg>
-          </a>
-          <a href="#" style={{ color: figmaColors.accentCyan }}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063a2.061 2.061 0 0 1-2.064 2.065zM7.119 20.452H3.554V9h3.565v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-            </svg>
-          </a>
-          <a href="#" style={{ color: figmaColors.accentCyan }}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932 6.064-6.933zm-1.292 19.49h2.039L6.486 3.24H4.298l13.311 17.403z"/>
-            </svg>
-          </a>
-        </div>
-
-        {/* Separator Line */}
-        <div style={{ width: "1px", height: "60px", background: figmaColors.borderLight, opacity: 0.5 }}></div>
-
-        {/* Mouse/Scroll Indicator */}
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
-          <div style={{ 
-            width: "24px", 
-            height: "40px", 
-            border: `2px solid ${figmaColors.accentCyan}`, 
-            borderRadius: "12px",
-            position: "relative",
+        {/* Social Sidebar - ALIGNED TO CONTENT RIGHT EDGE (84px offset) */}
+        <div
+          style={{
+            position: "absolute",
+            right: "6px", // Matches figmaSpacing.positioning.logoLeft for symmetry
+            top: "50%",
+            transform: "translateY(-50%)",
             display: "flex",
-            justifyContent: "center",
-          }}>
-            <div style={{ 
-              width: "4px", 
-              height: "8px", 
-              backgroundColor: figmaColors.accentCyan, 
-              borderRadius: "2px",
-              marginTop: "8px",
-              animation: "scrollAnim 1.5s infinite"
-            }}></div>
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "24px",
+            zIndex: 50,
+          }}
+          className="hidden xl:flex" // Only visible on large desktop
+        >
+          {/* Social Links */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "20px", alignItems: "center" }}>
+            <a href="#" style={{ color: figmaColors.accentCyan }}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
+              </svg>
+            </a>
+            <a href="#" style={{ color: figmaColors.accentCyan }}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+            </a>
+            <a href="#" style={{ color: figmaColors.accentCyan }}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063a2.061 2.061 0 0 1-2.064 2.065zM7.119 20.452H3.554V9h3.565v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </a>
+            <a href="#" style={{ color: figmaColors.accentCyan }}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932 6.064-6.933zm-1.292 19.49h2.039L6.486 3.24H4.298l13.311 17.403z"/>
+              </svg>
+            </a>
           </div>
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={figmaColors.accentCyan} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
-          </svg>
-        </div>
 
-        {/* Animation Style */}
-        <style dangerouslySetInnerHTML={{ __html: `
-          @keyframes scrollAnim {
-            0% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(8px); opacity: 0; }
-          }
-        `}} />
+          {/* Separator Line */}
+          <div style={{ width: "1px", height: "60px", background: figmaColors.borderLight, opacity: 0.5 }}></div>
+
+          {/* Mouse/Scroll Indicator */}
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
+            <div style={{ 
+              width: "24px", 
+              height: "40px", 
+              border: `2px solid ${figmaColors.accentCyan}`, 
+              borderRadius: "12px",
+              position: "relative",
+              display: "flex",
+              justifyContent: "center",
+            }}>
+              <div style={{ 
+                width: "4px", 
+                height: "8px", 
+                backgroundColor: figmaColors.accentCyan, 
+                borderRadius: "2px",
+                marginTop: "8px",
+                animation: "scrollAnim 1.5s infinite"
+              }}></div>
+            </div>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={figmaColors.accentCyan} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+            </svg>
+          </div>
+
+          {/* Animation Style */}
+          <style dangerouslySetInnerHTML={{ __html: `
+            @keyframes scrollAnim {
+              0% { transform: translateY(0); opacity: 1; }
+              100% { transform: translateY(8px); opacity: 0; }
+            }
+          `}} />
+        </div>
       </div>
     </section>
   );
