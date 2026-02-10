@@ -61,21 +61,22 @@ const InnovationInitiativesSection: React.FC = () => {
             flex: "1",
             display: "flex",
             flexDirection: "column",
-            justifyContent: "center", // Middle alignment
-            alignItems: "center", // Center alignment
-            minHeight: "500px", // Match image height for vertical centering
+            justifyContent: "center", // Vertical centering within the flex item
+            alignItems: "center", // Horizontal centering within the flex item
+            minHeight: "500px",
             zIndex: 10,
           }}
-          className="order-1 md:order-2 px-4 md:px-10"
+          className="order-1 md:order-2 px-4 md:px-0" // Removed md:px-10 for cleaner centering
         >
-          {/* Unified Content Block */}
+          {/* Unified Content Block - Precisely Centered */}
           <div 
             style={{ 
               display: "flex", 
               flexDirection: "column", 
-              gap: "24px", 
+              gap: "32px", // Increased gap to match Figma feel
               alignItems: "center",
-              textAlign: "center" 
+              textAlign: "center",
+              maxWidth: "600px" // Bound the content width
             }}
           >
             {/* Main Heading */}

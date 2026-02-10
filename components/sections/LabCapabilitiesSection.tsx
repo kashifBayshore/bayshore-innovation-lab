@@ -99,8 +99,8 @@ const LabCapabilitiesSection: React.FC = () => {
             <Heading level={2} gradient style={{ marginBottom: "20px", whiteSpace: "nowrap" }}>
                 Lab Capabilities
             </Heading>
-            <Text size="sm" color="secondary" style={{ width: "100%", maxWidth: "317px", lineHeight: "1.6", margin: "0 auto md:0" }}>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.
+            <Text size="sm" color="secondary" style={{ width: "100%", maxWidth: "450px", lineHeight: "1.6", margin: "0 auto md:0" }}>
+                Our lab is equipped with state-of-the-art infrastructure designed to support complex research and development cycles. From high-performance computing clusters to secure sandboxes for experimentation, we provide the environment necessary to turn ambitious concepts into functional prototypes.
             </Text>
         </div>
 

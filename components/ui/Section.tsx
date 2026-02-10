@@ -20,9 +20,9 @@ export const Section: React.FC<SectionProps> = ({
 }) => {
   const paddingMap = {
     sm: "py-4 md:py-6 lg:py-8",
-    md: "py-8 md:py-10 lg:py-12",
-    lg: "py-12 md:py-16 lg:py-20",
-    xl: "py-16 md:py-24 lg:py-28",
+    md: "py-[84px]",
+    lg: "py-[120px]",
+    xl: "py-[160px]",
   };
 
   return (

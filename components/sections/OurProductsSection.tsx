@@ -10,28 +10,28 @@ const PRODUCT_ICON = "/Mapping search.svg";
 
 const products = [
   {
-    title: "Mapping Research",
+    title: "Precision Mapping AI",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.",
-    link: "https://mappingresearch.com",
+      "Advanced geospatial analysis tool that leverages machine learning to create high-fidelity maps for urban planning and environmental monitoring.",
+    link: "https://mappingresearch.com/precision",
   },
   {
-    title: "Mapping Research",
+    title: "EcoSmart Solutions",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.",
-    link: "https://mappingresearch.com",
+      "A comprehensive suite of IoT-driven sensors and analytical platforms designed to optimize energy consumption and reduce the carbon footprint of industrial facilities.",
+    link: "https://mappingresearch.com/ecosmart",
   },
   {
-    title: "Mapping Research",
+    title: "CyberShield Research",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.",
-    link: "https://mappingresearch.com",
+      "Next-generation cybersecurity framework utilizing agentic AI to detect and mitigate zero-day vulnerabilities across distributed cloud networks.",
+    link: "https://mappingresearch.com/cybershield",
   },
   {
-    title: "Mapping Research",
+    title: "Quantum Insight Engine",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.",
-    link: "https://mappingresearch.com",
+      "A hybrid quantum-classical computing platform for solving complex optimization problems in logistics and large-scale data processing.",
+    link: "https://mappingresearch.com/quantum",
   },
 ];
 
@@ -51,22 +51,32 @@ export const OurProductsSection: React.FC = () => {
         </Heading>
 
         <div
-          className="grid grid-cols-1 md:grid-cols-2 gap-[30px]"
+          className="grid grid-cols-1 md:grid-cols-12 gap-[30px]"
         >
-          {products.map((product, index) => (
-            <div
-              key={index}
-              style={{
-                backgroundColor: figmaColors.backgroundWhite,
-                borderRadius: "20px",
-                padding: "40px",
-                boxShadow: figmaColors.cardShadow,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-                gap: "20px",
-              }}
-            >
+          {products.map((product, index) => {
+            // Alternating pattern: 
+            // Card 1 (idx 0): 5 cols
+            // Card 2 (idx 1): 7 cols
+            // Card 3 (idx 2): 7 cols
+            // Card 4 (idx 3): 5 cols
+            const colSpanClass = (index === 0 || index === 3) ? "md:col-span-5" : "md:col-span-7";
+            
+            return (
+              <div
+                key={index}
+                className={colSpanClass}
+                style={{
+                  backgroundColor: figmaColors.backgroundWhite,
+                  borderRadius: "20px",
+                  padding: "40px",
+                  boxShadow: figmaColors.cardShadow,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  gap: "20px",
+                  height: "100%", // Ensure card fills grid cell height
+                }}
+              >
               {/* Asset Icon */}
               <div
                 style={{
@@ -108,6 +118,7 @@ export const OurProductsSection: React.FC = () => {
                   display: "flex",
                   alignItems: "center",
                   gap: "8px",
+                  marginTop: "auto", // Push to bottom
                 }}
               >
                 {product.link}
@@ -129,7 +140,8 @@ export const OurProductsSection: React.FC = () => {
                 </svg>
               </a>
             </div>
-          ))}
+          );
+        })}
         </div>
       </div>
     </Section>
