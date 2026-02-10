@@ -61,7 +61,7 @@ const ResearchAreasSection: React.FC = () => {
           marginBottom: "64px", 
           display: "flex", 
           alignItems: "center", 
-          gap: "24px",
+          gap: "0px",
           width: "100%"
         }}>
           <Heading 
@@ -77,7 +77,7 @@ const ResearchAreasSection: React.FC = () => {
           </Heading>
           
           {/* Decorative Line with Terminal Node */}
-          <div style={{ flex: 1, position: "relative", height: "64px", top: "24px" }}>
+          <div style={{ flex: 1, position: "relative", height: "64px", top: "34px" }}>
             <svg
               width="100%"
               height="64"
