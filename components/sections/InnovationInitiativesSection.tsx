@@ -17,25 +17,22 @@ const InnovationInitiativesSection: React.FC = () => {
           maxWidth: figmaSpacing.container.full,
           margin: "0 auto",
           padding: "0 20px",
-          display: "grid",
-          gridTemplateColumns: "1fr 1.2fr",
-          gap: "40px",
-          alignItems: "center", // Vertically center the graphic and text
+          display: "flex",
           position: "relative",
           zIndex: 1,
+          gap: "40px",
+          minHeight: "400px",
         }}
-        className="grid-cols-1 md:grid-cols-2"
+        className="flex-col md:flex-row items-center"
       >
-        {/* Left Side Graphic - Group 408.svg */}
+        {/* Left Side - Image Container (Original Place) */}
         <div
           style={{
-            position: "relative",
-            width: "100%",
-            height: "100%",
-            minHeight: "400px",
+            flex: "1",
             display: "flex",
             justifyContent: "flex-start",
             alignItems: "center",
+            width: "100%",
           }}
           className="order-2 md:order-1"
         >
@@ -44,7 +41,7 @@ const InnovationInitiativesSection: React.FC = () => {
               position: "relative",
               width: "100%",
               maxWidth: "388px",
-              height: "600px", 
+              height: "500px", 
               maxHeight: "60vh",
             }}
           >
@@ -58,34 +55,46 @@ const InnovationInitiativesSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Content Area - Right Side */}
+        {/* Right Side - Content Container (Centered & Middle) */}
         <div
           style={{
+            flex: "1",
             display: "flex",
             flexDirection: "column",
-            gap: "40px",
+            justifyContent: "center", // Middle alignment
+            alignItems: "center", // Center alignment
+            minHeight: "500px", // Match image height for vertical centering
             zIndex: 10,
           }}
-          className="order-1 md:order-2 text-center md:text-left px-4 md:px-10"
+          className="order-1 md:order-2 px-4 md:px-10"
         >
-          {/* Main Heading */}
-          <Heading
-            level={2}
-            gradient
-            style={{
-              fontSize: "clamp(32px, 4vw, 56px)",
-              lineHeight: "1.2",
-              margin: 0,
-              whiteSpace: "nowrap",
+          {/* Unified Content Block */}
+          <div 
+            style={{ 
+              display: "flex", 
+              flexDirection: "column", 
+              gap: "24px", 
+              alignItems: "center",
+              textAlign: "center" 
             }}
           >
-            Innovation Initiatives
-          </Heading>
+            {/* Main Heading */}
+            <Heading
+              level={2}
+              gradient
+              centered
+              style={{
+                fontSize: "clamp(32px, 4vw, 56px)",
+                lineHeight: "1.1",
+                margin: 0,
+                whiteSpace: "nowrap",
+              }}
+            >
+              Innovation Initiatives
+            </Heading>
 
-          {/* Feature List Container */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
-            {/* Rapid Prototyping */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+            {/* Feature Content */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "12px", alignItems: "center" }}>
               <h3
                 style={{
                   fontFamily: figmaTypography.fontFamily.openSans.join(", "),
@@ -104,7 +113,7 @@ const InnovationInitiativesSection: React.FC = () => {
                   lineHeight: "1.6",
                   color: figmaColors.textSecondary,
                   margin: 0,
-                  maxWidth: "600px",
+                  maxWidth: "500px",
                 }}
               >
                 Fast-track development of proof-of-concepts and MVPs to validate
