@@ -6,31 +6,41 @@ import { Section } from '@/components/ui/Section';
 
 export const Mission: React.FC = () => {
   return (
-    <Section background={figmaColors.backgroundWhite} size="sm">
+    <Section background={figmaColors.backgroundPrimary} size="sm">
       <div 
         style={{ 
           maxWidth: figmaSpacing.container.full, 
           margin: "0 auto", 
-          padding: "0 20px" 
+          padding: "0px 10px" 
         }}
       >
-        <div style={{ textAlign: "center", maxWidth: "1000px", margin: "0 auto" }}>
-          <Heading 
-            level={3}
-            centered
-            style={{ marginBottom: "32px" }}
+        <div style={{ textAlign: "center", width: "100%", margin: "0 auto" }}>
+          <h2
+            style={{
+              fontFamily: "'Open Sans', sans-serif",
+              fontSize: "36px",
+              fontWeight: "700",
+              color: "#313131",
+              marginBottom: "32px",
+              textAlign: "center"
+            }}
           >
             Our Mission
-          </Heading>
+          </h2>
           
-          <Text 
-            size="sm"
-            color="secondary"
-            centered
-            style={{ lineHeight: "1.6" }}
+          <p
+            style={{
+              fontFamily: "'Open Sans', sans-serif",
+              fontSize: "19px",
+              lineHeight: "1.6",
+              color: "#7b868f",
+              textAlign: "center",
+              width: "100%",
+              margin: "0 auto"
+            }}
           >
             The Bayshore Innovation Lab serves as our research and development hub, dedicated to exploring emerging technologies, conducting cutting-edge research, and transforming innovative ideas into practical solutions. We bridge the gap between theoretical research and real-world applications, ensuring that our innovations deliver tangible value to businesses and society.
-          </Text>
+          </p>
         </div>
       </div>
     </Section>
