@@ -40,7 +40,7 @@ export const HeroSection: React.FC = () => {
           width: "100%",
           maxWidth: figmaSpacing.container.full,
           margin: "0 auto",
-          padding: `50px ${figmaSpacing.section.md} 60px`, // 50px from top
+          padding: "50px 20px 60px", 
           position: "relative",
           zIndex: 10,
           display: "flex",

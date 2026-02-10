@@ -78,8 +78,9 @@ const LabCapabilitiesSection: React.FC = () => {
     <Section background={figmaColors.backgroundWhite} style={{ overflow: "hidden", minHeight: "700px" }}>
        <div
         style={{
-          maxWidth: "1400px",
+          maxWidth: figmaSpacing.container.full,
           margin: "0 auto",
+          padding: "0 20px",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",

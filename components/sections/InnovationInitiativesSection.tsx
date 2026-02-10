@@ -16,10 +16,11 @@ const InnovationInitiativesSection: React.FC = () => {
         style={{
           maxWidth: figmaSpacing.container.full,
           margin: "0 auto",
+          padding: "0 20px",
           display: "grid",
           gridTemplateColumns: "1fr 1.2fr",
           gap: "40px",
-          alignItems: "center",
+          alignItems: "center", // Vertically center the graphic and text
           position: "relative",
           zIndex: 1,
         }}
@@ -73,9 +74,10 @@ const InnovationInitiativesSection: React.FC = () => {
             level={2}
             gradient
             style={{
-              fontSize: "clamp(36px, 5vw, 56px)",
+              fontSize: "clamp(32px, 4vw, 56px)",
               lineHeight: "1.2",
               margin: 0,
+              whiteSpace: "nowrap", // ENSURING ONE LINE
             }}
           >
             Innovation Initiatives
@@ -110,9 +112,6 @@ const InnovationInitiativesSection: React.FC = () => {
                 innovative ideas and bring them to market quickly.
               </p>
             </div>
-            
-            {/* Note: I can add more items here if they appear in other designs, 
-                for now sticking to the provided screenshot content */}
           </div>
         </div>
       </div>

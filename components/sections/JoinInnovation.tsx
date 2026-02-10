@@ -18,7 +18,7 @@ export const JoinInnovation: React.FC = () => {
             alignItems: 'center',
             position: 'relative',
             overflow: 'hidden', // Keep the wide SVGs from causing scroll
-            padding: "80px 0"
+            padding: "80px 20px"
         }}
       >
         {/* Heading */}
@@ -107,7 +107,7 @@ export const JoinInnovation: React.FC = () => {
             bottom: "0",
             left: "50%",
             transform: "translateX(-50%)",
-            width: "1267px",
+            width: figmaSpacing.container.full,
             height: "1px",
             background: `linear-gradient(90deg, transparent, ${figmaColors.borderLight}, transparent)`,
           }}

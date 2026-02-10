@@ -4,6 +4,7 @@ import ResearchAreasSection from "@/components/sections/ResearchAreasSection";
 import LabCapabilitiesSection from "@/components/sections/LabCapabilitiesSection";
 import InnovationInitiativesSection from "@/components/sections/InnovationInitiativesSection";
 import { JoinInnovation } from "@/components/sections/JoinInnovation";
+import { Mission } from "@/components/sections/Mission";
 import { OurProductsSection } from "../components/sections/OurProductsSection";
 import {
   figmaColors,
@@ -47,37 +48,8 @@ export default function Home() {
          So I SHOULD reorder.
       */}
 
-      {/* Our Mission Section */}
-      <Section>
-        <div
-          style={{
-            maxWidth: figmaSpacing.container.content,
-            margin: "0 auto",
-            textAlign: "center",
-          }}
-        >
-          <Heading level={2} centered style={{ marginBottom: "20px" }}>
-            Our Mission
-          </Heading>
-          <Text
-            size="lg"
-            centered
-            maxWidth="1270px"
-            style={{
-              color: figmaColors.textSecondary,
-              fontWeight: figmaTypography.fontWeight.semibold,
-              margin: "0 auto",
-            }}
-          >
-            The Bayshore Innovation Lab serves as our research and development
-            hub, dedicated to exploring emerging technologies, conducting
-            cutting-edge research, and transforming innovative ideas into
-            practical solutions. We bridge gap between theoretical research and
-            real-world applications, ensuring that our innovations deliver
-            tangible value to businesses and society.
-          </Text>
-        </div>
-      </Section>
+      {/* Mission Section */}
+      <Mission />
 
       {/* Innovation Initiatives Section - EXACT FIGMA */}
       <InnovationInitiativesSection />

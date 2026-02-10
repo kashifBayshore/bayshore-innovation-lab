@@ -22,7 +22,7 @@ export const Section: React.FC<SectionProps> = ({
       style={{
         backgroundColor: background,
         width: "100%",
-        padding: noPadding ? 0 : `${figmaSpacing.section.lg} ${figmaSpacing.section.md}`,
+        padding: noPadding ? 0 : `${figmaSpacing.section.lg} 0`,
         ...style,
       }}
     >

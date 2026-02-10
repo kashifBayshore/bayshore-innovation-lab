@@ -40,8 +40,9 @@ export const OurProductsSection: React.FC = () => {
     <Section background={figmaColors.backgroundPrimary}>
       <div
         style={{
-          maxWidth: figmaSpacing.container.content,
+          maxWidth: figmaSpacing.container.full,
           margin: "0 auto",
+          padding: "0 20px",
         }}
       >
         {/* Gradient Heading */}

@@ -1,23 +1,24 @@
 import React from 'react';
 import { Heading } from '@/components/ui/Heading';
 import { Text } from '@/components/ui/Text';
-import { colors, spacing } from '@/types/design-tokens';
+import { figmaColors, figmaSpacing } from '@/tokens/figma-design';
+import { Section } from '@/components/ui/Section';
 
 export const Mission: React.FC = () => {
   return (
-    <section 
-      className="w-full"
-      style={{ 
-        backgroundColor: colors.background.white,
-        paddingTop: spacing['3xl'],
-        paddingBottom: spacing['3xl'],
-      }}
-    >
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center max-w-5xl mx-auto">
+    <Section background={figmaColors.backgroundWhite}>
+      <div 
+        style={{ 
+          maxWidth: figmaSpacing.container.full, 
+          margin: "0 auto", 
+          padding: "0 20px" 
+        }}
+      >
+        <div style={{ textAlign: "center", maxWidth: "1000px", margin: "0 auto" }}>
           <Heading 
             level={3}
-            className="mb-8 text-center"
+            centered
+            style={{ marginBottom: "32px" }}
           >
             Our Mission
           </Heading>
@@ -25,12 +26,13 @@ export const Mission: React.FC = () => {
           <Text 
             size="sm"
             color="secondary"
-            className="text-center leading-6"
+            centered
+            style={{ lineHeight: "1.6" }}
           >
             The Bayshore Innovation Lab serves as our research and development hub, dedicated to exploring emerging technologies, conducting cutting-edge research, and transforming innovative ideas into practical solutions. We bridge the gap between theoretical research and real-world applications, ensuring that our innovations deliver tangible value to businesses and society.
           </Text>
         </div>
       </div>
-    </section>
+    </Section>
   );
 };
