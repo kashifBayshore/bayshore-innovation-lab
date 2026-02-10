@@ -21,7 +21,7 @@ const InnovationInitiativesSection: React.FC = () => {
           position: "relative",
           zIndex: 1,
           gap: "40px",
-          minHeight: "500px",
+          minHeight: "400px",
         }}
         className="flex-col md:flex-row items-center"
       >
@@ -41,8 +41,8 @@ const InnovationInitiativesSection: React.FC = () => {
               position: "relative",
               width: "100%",
               maxWidth: "388px",
-              height: "500px", 
-              maxHeight: "60vh",
+              height: "400px", 
+              maxHeight: "50vh",
             }}
           >
             <Image
@@ -63,10 +63,10 @@ const InnovationInitiativesSection: React.FC = () => {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            minHeight: "500px",
+            minHeight: "400px",
             zIndex: 10,
           }}
-          className="order-1 md:order-2 px-4 md:px-0 md:absolute md:left-1/2 md:-translate-x-1/2"
+          className="order-1 md:order-2 px-4 md:px-0 md:absolute md:left-1/2 md:-translate-x-1/2 md:w-full"
         >
           {/* Unified Content Block - Precisely Centered */}
           <div 

@@ -8,7 +8,7 @@ import { Section } from '@/components/ui/Section';
 
 export const JoinInnovation: React.FC = () => {
   return (
-    <Section background={figmaColors.backgroundWhite} size="lg">
+    <Section background={figmaColors.backgroundWhite} size="sm">
       <div 
         style={{ 
             maxWidth: figmaSpacing.container.full, 
@@ -21,7 +21,7 @@ export const JoinInnovation: React.FC = () => {
         }}
       >
         {/* Heading */}
-        <Heading level={2} centered style={{ marginBottom: "20px" }}>
+        <Heading level={2} centered style={{ marginBottom: "12px" }}>
           Join Our Innovation Journey
         </Heading>
         
@@ -33,7 +33,7 @@ export const JoinInnovation: React.FC = () => {
           style={{ 
               maxWidth: "1178px", 
               lineHeight: "24px",
-              marginBottom: "40px"
+              marginBottom: "24px"
           }}
         >
           Interested in collaborating on research projects, exploring innovative solutions, or learning more about our work? We're always open to partnerships and discussions that push the boundaries of technology.
