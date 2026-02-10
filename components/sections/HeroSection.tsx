@@ -10,7 +10,8 @@ import { Button } from "@/components/ui/Button";
 export const HeroSection: React.FC = () => {
   return (
     <section
-      className="py-8 md:py-14 lg:py-16"
+      className="py-8 md:py-14 lg:py-16 landscape:py-6"
+
       style={{
         position: "relative",
         width: "100%",
@@ -87,19 +88,19 @@ export const HeroSection: React.FC = () => {
                   style={{
                     fontFamily: figmaTypography.fontFamily.openSans.join(", "),
                     fontWeight: figmaTypography.fontWeight.bold,
-                    fontSize: "clamp(32px, 4.5vw, 56px)", // Slightly reduced for single line stability
+                    fontSize: "clamp(28px, 5vw, 56px)", // Slightly more aggressive reduction for very small mobiles
                     lineHeight: "1.2",
                     background: figmaColors.primaryGradient,
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                     backgroundClip: "text",
                     margin: 0,
-                    whiteSpace: "nowrap", // Force single line
                   }}
-                  className="whitespace-normal md:whitespace-nowrap"
+                  className="whitespace-normal lg:whitespace-nowrap" // Allow wrap on tablet, force single line only on large screens
                 >
                   Bayshore Innovation Lab
                 </h1>
+
 
                 <div
                   style={{
@@ -149,14 +150,15 @@ export const HeroSection: React.FC = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              paddingTop: "40px", 
             }}
+            className="pt-10 md:pt-0 landscape:pt-4"
           >
+
             {/* Background Ellipse - Centered behind the visual */}
              <div
                 style={{
                     position: "absolute",
-                    width: "180%", // Larger than visual to act as halo
+                    width: "180%", 
                     height: "180%",
                     zIndex: 0,
                     opacity: 0.8,
@@ -174,23 +176,27 @@ export const HeroSection: React.FC = () => {
             {/* Main Visual - Group 421.svg */}
             <div style={{ 
                 position: "relative", 
-                width: "100%", 
-                height: "100%", 
+                width: "min(100%, 430px)", 
+                height: "auto", 
+                aspectRatio: "430/588",
                 zIndex: 1,
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center"
-            }}>
+            }}
+            className="landscape:max-h-[60vh] md:landscape:max-h-none"
+            >
+
                 <Image
                 src="/Group 421.svg"
                 alt="Innovation Visual"
-                width={430}
-                height={588}
-                style={{ objectFit: "contain", maxWidth: "100%", height: "auto" }}
+                fill
+                style={{ objectFit: "contain" }}
                 unoptimized
                 />
             </div>
           </div>
+
         </div>
 
         {/* Social Sidebar - ALIGNED TO CONTENT RIGHT EDGE (84px offset) */}

@@ -68,16 +68,17 @@ const ResearchAreasSection: React.FC = () => {
             level={2} 
             gradient 
             style={{ 
-              fontSize: "clamp(32px, 4vw, 42px)",
+              fontSize: "clamp(28px, 4vw, 42px)",
               margin: 0,
-              whiteSpace: "nowrap" 
             }}
+            className="whitespace-normal lg:whitespace-nowrap"
           >
             Research Areas
           </Heading>
+
           
           {/* Decorative Line with Terminal Node */}
-          <div style={{ flex: 1, position: "relative", height: "64px", top: "34px" }}>
+          <div className="hidden lg:block" style={{ flex: 1, position: "relative", height: "64px", top: "34px" }}>
             <svg
               width="100%"
               height="64"
@@ -115,6 +116,7 @@ const ResearchAreasSection: React.FC = () => {
               </defs>
             </svg>
           </div>
+
         </div>
 
         <div

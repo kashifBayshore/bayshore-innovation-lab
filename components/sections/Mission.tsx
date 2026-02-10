@@ -18,7 +18,7 @@ export const Mission: React.FC = () => {
           <h2
             style={{
               fontFamily: "'Open Sans', sans-serif",
-              fontSize: "36px",
+              fontSize: "clamp(28px, 5vw, 36px)",
               fontWeight: "700",
               color: "#313131",
               marginBottom: "32px",
@@ -31,7 +31,7 @@ export const Mission: React.FC = () => {
           <p
             style={{
               fontFamily: "'Open Sans', sans-serif",
-              fontSize: "19px",
+              fontSize: "clamp(16px, 2.5vw, 19px)",
               lineHeight: "1.6",
               color: "#7b868f",
               textAlign: "center",
@@ -42,6 +42,7 @@ export const Mission: React.FC = () => {
             The Bayshore Innovation Lab serves as our research and development hub, dedicated to exploring emerging technologies, conducting cutting-edge research, and transforming innovative ideas into practical solutions. We bridge the gap between theoretical research and real-world applications, ensuring that our innovations deliver tangible value to businesses and society.
           </p>
         </div>
+
       </div>
     </Section>
   );

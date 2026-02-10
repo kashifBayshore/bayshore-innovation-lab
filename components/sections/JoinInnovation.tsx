@@ -100,17 +100,18 @@ export const JoinInnovation: React.FC = () => {
       </div>
       
       {/* Bottom Separator Line */}
-       <div
+        <div
           style={{
             position: "absolute",
             bottom: "0",
             left: "50%",
             transform: "translateX(-50%)",
-            width: figmaSpacing.container.full,
+            width: "100%",
             height: "1px",
             background: `linear-gradient(90deg, transparent, ${figmaColors.borderLight}, transparent)`,
           }}
         />
+
     </Section>
   );
 };

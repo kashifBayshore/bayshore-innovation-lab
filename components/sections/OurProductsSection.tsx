@@ -51,17 +51,16 @@ export const OurProductsSection: React.FC = () => {
         </Heading>
 
         <div
-          className="grid grid-cols-1 md:grid-cols-12 gap-[30px]"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-[30px]"
         >
           {products.map((product, index) => {
-            // Alternating pattern: 
-            // Card 1 (idx 0): 5 cols
-            // Card 2 (idx 1): 7 cols
-            // Card 3 (idx 2): 7 cols
-            // Card 4 (idx 3): 5 cols
-            const colSpanClass = (index === 0 || index === 3) ? "md:col-span-5" : "md:col-span-7";
+            // Alternating pattern for Desktop (lg+): 
+            // Card 1: 5 cols, Card 2: 7 cols, Card 3: 7 cols, Card 4: 5 cols
+            // Tablet (md): 2 columns, so spans are simple.
+            const colSpanClass = (index === 0 || index === 3) ? "lg:col-span-5" : "lg:col-span-7";
             
             return (
+
               <div
                 key={index}
                 className={colSpanClass}

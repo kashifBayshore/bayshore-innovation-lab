@@ -84,28 +84,28 @@ const LabCapabilitiesSection: React.FC = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          flexWrap: "nowrap", // Ensure side-by-side on desktop
-          gap: "0px",
           position: "relative",
-          height: "500px", // Fixed height for alignment container
         }}
-        className="flex-col md:flex-row h-auto md:h-[500px]"
+        className="flex-col lg:flex-row h-auto lg:h-[500px]"
       >
+
         {/* Left Content */}
         <div 
-            style={{ width: "391px", flexShrink: 0, zIndex: 10, marginRight: "20px" }}
-            className="mb-10 md:mb-0 text-center md:text-left"
+            style={{ flexShrink: 0, zIndex: 10 }}
+            className="mb-10 lg:mb-0 text-center lg:text-left w-full lg:w-[391px] lg:mr-[20px]"
         >
-            <Heading level={2} gradient style={{ marginBottom: "20px", whiteSpace: "nowrap" }}>
+
+            <Heading level={2} gradient style={{ marginBottom: "20px" }} className="whitespace-normal lg:whitespace-nowrap">
                 Lab Capabilities
             </Heading>
+
             <Text size="sm" color="secondary" style={{ width: "100%", maxWidth: "450px", lineHeight: "1.6", margin: "0 auto md:0" }}>
                 Our lab is equipped with state-of-the-art infrastructure designed to support complex research and development cycles. From high-performance computing clusters to secure sandboxes for experimentation, we provide the environment necessary to turn ambitious concepts into functional prototypes.
             </Text>
         </div>
 
         {/* Center Dot */}
-        <div className="hidden md:block" style={{ 
+        <div className="hidden lg:block" style={{ 
             width: "20px", 
             height: "20px", 
             backgroundColor: figmaColors.accentCyan, 
@@ -115,8 +115,9 @@ const LabCapabilitiesSection: React.FC = () => {
             position: "relative",
         }}></div>
 
-        {/* Tree Container (Desktop Only) */}
-        <div className="hidden md:block" style={{ position: "relative", flexGrow: 1,  height: "100%" }}>
+        {/* Tree Container (Large Desktop Only) */}
+        <div className="hidden lg:block" style={{ position: "relative", flexGrow: 1,  height: "100%" }}>
+
             
             {/* The "Center" of this container aligns with the Dot */}
             <div style={{ position: "absolute", top: "50%", left: 0, width: "100%", height: "0px" }}>
@@ -165,26 +166,26 @@ const LabCapabilitiesSection: React.FC = () => {
             </div>
         </div>
 
-        {/* Mobile View: Stacked Cards */}
-        <div className="flex md:hidden flex-col gap-4 mt-8">
+        {/* Mobile & Tablet View: Stacked or 2-column Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:hidden gap-4 mt-8 w-full max-w-4xl mx-auto">
             {capabilities.map((cap, i) => (
                  <div key={i} style={{
                      width: "100%",
-                     maxWidth: "395px",
-                     height: "68px",
+                     minHeight: "68px",
                      backgroundColor: figmaColors.backgroundWhite,
                      borderRadius: "12px",
                      boxShadow: figmaColors.cardShadow,
                      display: "flex",
                      alignItems: "center",
                      justifyContent: "center",
-                     padding: "0 20px",
+                     padding: "12px 20px",
                      border: `1px solid ${figmaColors.borderLight}`,
                  }}>
                      <Text size="sm" weight="medium" style={{ textAlign: "center", fontSize: "14px" }}>{cap.title}</Text>
                  </div>
             ))}
         </div>
+
 
       </div>
     </Section>

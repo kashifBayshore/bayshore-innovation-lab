@@ -20,20 +20,27 @@ export const Footer: React.FC = () => {
           margin: "0 auto",
           padding: "0 20px",
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
           gap: "40px",
           marginBottom: "80px",
         }}
-        className="grid-cols-1 md:grid-cols-2 lg:grid-cols-4" // Tailwind responsive classes
+        className="grid-cols-1 md:grid-cols-2 lg:grid-cols-4" 
       >
+
         {/* Column 1: Logo & Desc */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-          <div style={{ position: "relative", width: "180px", height: "60px" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "20px" }} className="items-center md:items-start text-center md:text-left">
+          <div 
+            style={{ 
+                position: "relative", 
+                width: "clamp(140px, 15vw, 180px)", 
+                height: "60px" 
+            }}
+          >
             <Image
-              src="/bayshore-logo.png" // Using the logo found in public
+              src="/bayshore-logo.png"
               alt="Bayshore Intelligence Solutions"
               fill
-              style={{ objectFit: "contain", objectPosition: "left" }}
+              style={{ objectFit: "contain", objectPosition: "inherit" }}
+              className="md:object-left"
             />
           </div>
           <Text size="sm" color="secondary" style={{ lineHeight: "1.6" }}>
@@ -42,8 +49,9 @@ export const Footer: React.FC = () => {
           </Text>
         </div>
 
+
         {/* Column 2: India Office */}
-        <div>
+        <div className="text-center md:text-left">
           <Heading level={4} style={{ fontSize: "16px", fontWeight: "bold", marginBottom: "20px", textTransform: "uppercase" }}>
             INDIA OFFICE
           </Heading>
@@ -62,8 +70,9 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
+
         {/* Column 3: USA Office */}
-        <div>
+        <div className="text-center md:text-left">
           <Heading level={4} style={{ fontSize: "16px", fontWeight: "bold", marginBottom: "20px", textTransform: "uppercase" }}>
             USA OFFICE
           </Heading>
@@ -81,15 +90,15 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Column 4: Newsletter */}
-        <div>
+
+        <div className="flex flex-col items-center md:items-start">
           <Heading level={4} style={{ fontSize: "16px", fontWeight: "bold", marginBottom: "20px", textTransform: "uppercase" }}>
             JOIN OUR NEWSLETTER
           </Heading>
           <Text size="sm" color="secondary" style={{ marginBottom: "10px" }}>
             Your Email
           </Text>
-          <div style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
+          <div className="flex flex-col sm:flex-row gap-[10px] mb-5 w-full">
              <input 
                 type="email" 
                 placeholder="Enter Your Email"
@@ -108,7 +117,7 @@ export const Footer: React.FC = () => {
           </div>
           
           {/* Social Icons - Unified 24px spacing */}
-          <div style={{ display: "flex", gap: "24px" }}>
+          <div style={{ display: "flex", gap: "24px" }} className="justify-center md:justify-start">
              {/* Facebook */}
              <a href="#" style={{ width: "32px", height: "32px", borderRadius: "50%", border: `1px solid ${figmaColors.accentCyan}`, display: "flex", alignItems: "center", justifyContent: "center", color: figmaColors.accentCyan }}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -135,15 +144,18 @@ export const Footer: React.FC = () => {
              </a>
           </div>
         </div>
+
       </div>
 
       {/* Bottom Copyright Bar */}
       <div
         style={{
           borderTop: `1px solid ${figmaColors.borderLight}`,
-          padding: "20px 0",
+          paddingTop: "20px",
+          paddingBottom: "calc(20px + env(safe-area-inset-bottom, 0px))",
         }}
       >
+
         <div 
           style={{
              maxWidth: figmaSpacing.container.full,
@@ -153,8 +165,9 @@ export const Footer: React.FC = () => {
              justifyContent: "space-between",
              alignItems: "center",
              flexWrap: "wrap",
-             gap: "10px"
+             gap: "20px"
           }}
+          className="justify-center sm:justify-between"
         >
             <Text size="xs" color="secondary">
                 © Copyright 2025. All Rights Reserved.
@@ -163,6 +176,7 @@ export const Footer: React.FC = () => {
                 Privacy Policy
             </Text>
         </div>
+
       </div>
     </footer>
   );

@@ -21,10 +21,11 @@ const InnovationInitiativesSection: React.FC = () => {
           position: "relative",
           zIndex: 1,
           gap: "40px",
-          height: "450px", // Reduced section height
         }}
-        className="flex-col md:flex-row items-center"
+        className="flex-col lg:flex-row items-center min-h-[450px]"
+
       >
+
         {/* Left Side - Image Container (Original Place) */}
         <div
           style={{
@@ -34,16 +35,17 @@ const InnovationInitiativesSection: React.FC = () => {
             alignItems: "center",
             width: "100%",
             position: "relative",
-            height: "100%",
           }}
-          className="order-2 md:order-1"
+          className="order-2 lg:order-1 h-[300px] lg:h-full"
+
         >
+
           <div
             style={{
               position: "absolute",
               width: "100%", 
               maxWidth: "650px",
-              height: "600px", // STRICTLY UNCHANGED
+              height: "clamp(300px, 40vw, 600px)", // Responsive height but maintains original 600px cap
               top: "50%",
               left: 0,
               transform: "translateY(-50%)",
@@ -57,6 +59,7 @@ const InnovationInitiativesSection: React.FC = () => {
               unoptimized
             />
           </div>
+
         </div>
 
         {/* Right Side - Content Container (Centered Globally on Desktop) */}
@@ -67,11 +70,12 @@ const InnovationInitiativesSection: React.FC = () => {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            height: "100%",
             zIndex: 10,
           }}
-          className="order-1 md:order-2 px-4 md:px-0 md:absolute md:left-1/2 md:-translate-x-1/2 md:w-full"
+          className="order-1 lg:order-2 px-4 lg:px-0 lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:w-full h-auto lg:h-full py-10 lg:py-0"
+
         >
+
           {/* Unified Content Block - Precisely Centered */}
           <div 
             style={{ 
@@ -89,14 +93,15 @@ const InnovationInitiativesSection: React.FC = () => {
               gradient
               centered
               style={{
-                fontSize: "clamp(32px, 4vw, 56px)",
+                fontSize: "clamp(28px, 4vw, 56px)",
                 lineHeight: "1.1",
                 margin: 0,
-                whiteSpace: "nowrap",
               }}
+              className="whitespace-normal lg:whitespace-nowrap"
             >
               Innovation Initiatives
             </Heading>
+
 
             {/* Feature Content */}
             <div style={{ display: "flex", flexDirection: "column", gap: "12px", alignItems: "center" }}>
