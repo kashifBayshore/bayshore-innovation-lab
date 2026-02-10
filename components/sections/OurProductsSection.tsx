@@ -37,7 +37,7 @@ const products = [
 
 export const OurProductsSection: React.FC = () => {
   return (
-    <Section background={figmaColors.backgroundPrimary}>
+    <Section background={figmaColors.backgroundPrimary} size="md">
       <div
         style={{
           maxWidth: figmaSpacing.container.full,
@@ -46,16 +46,12 @@ export const OurProductsSection: React.FC = () => {
         }}
       >
         {/* Gradient Heading */}
-        <Heading level={2} gradient centered style={{ marginBottom: "60px" }}>
+        <Heading level={2} gradient centered style={{ marginBottom: "40px" }}>
           Our Products
         </Heading>
 
         <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(2, 1fr)",
-            gap: "30px",
-          }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-[30px]"
         >
           {products.map((product, index) => (
             <div

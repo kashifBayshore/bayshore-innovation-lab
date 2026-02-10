@@ -8,7 +8,7 @@ import { Section } from '@/components/ui/Section';
 
 export const JoinInnovation: React.FC = () => {
   return (
-    <Section background={figmaColors.backgroundWhite}>
+    <Section background={figmaColors.backgroundWhite} size="lg">
       <div 
         style={{ 
             maxWidth: figmaSpacing.container.full, 
@@ -18,7 +18,6 @@ export const JoinInnovation: React.FC = () => {
             alignItems: 'center',
             position: 'relative',
             overflow: 'hidden', // Keep the wide SVGs from causing scroll
-            padding: "80px 20px"
         }}
       >
         {/* Heading */}
@@ -34,7 +33,7 @@ export const JoinInnovation: React.FC = () => {
           style={{ 
               maxWidth: "1178px", 
               lineHeight: "24px",
-              marginBottom: "60px"
+              marginBottom: "40px"
           }}
         >
           Interested in collaborating on research projects, exploring innovative solutions, or learning more about our work? We're always open to partnerships and discussions that push the boundaries of technology.

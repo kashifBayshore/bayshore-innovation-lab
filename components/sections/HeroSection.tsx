@@ -10,14 +10,14 @@ import { Button } from "@/components/ui/Button";
 export const HeroSection: React.FC = () => {
   return (
     <section
+      className="py-8 md:py-14 lg:py-16"
       style={{
         position: "relative",
         width: "100%",
         backgroundColor: figmaColors.backgroundPrimary,
-        minHeight: "750px", // Slightly reduced for better fit
         overflow: "hidden",
         display: "flex",
-        flexDirection: "column", // Stack vertically for top-down flow
+        flexDirection: "column",
       }}
     >
       {/* Background for entire section - keeping it subtle */}
@@ -40,7 +40,7 @@ export const HeroSection: React.FC = () => {
           width: "100%",
           maxWidth: figmaSpacing.container.full,
           margin: "0 auto",
-          padding: "50px 20px 60px", 
+          padding: "0 20px", 
           position: "relative",
           zIndex: 10,
           display: "flex",
@@ -149,7 +149,7 @@ export const HeroSection: React.FC = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              paddingTop: "80px", // Added 80px top spacing as requested
+              paddingTop: "40px", 
             }}
           >
             {/* Background Ellipse - Centered behind the visual */}

@@ -48,7 +48,7 @@ const ResearchAreasSection: React.FC = () => {
   ];
 
   return (
-    <Section background={figmaColors.backgroundWhite} style={{ position: "relative", overflow: "visible" }}>
+    <Section background={figmaColors.backgroundWhite} size="md" style={{ position: "relative", overflow: "visible" }}>
       <div
         style={{
           maxWidth: figmaSpacing.container.full,
@@ -57,7 +57,7 @@ const ResearchAreasSection: React.FC = () => {
         }}
       >
         {/* Heading Area with Decorative Line */}
-        <div style={{ marginBottom: "60px", position: "relative", display: "flex", alignItems: "center" }}>
+        <div style={{ marginBottom: "40px", position: "relative", display: "flex", alignItems: "center" }}>
           <Heading level={2} gradient style={{ marginRight: "20px", whiteSpace: "nowrap" }}>
             Research Areas
           </Heading>
@@ -76,11 +76,8 @@ const ResearchAreasSection: React.FC = () => {
         </div>
 
         <div
+          className="grid grid-cols-1 md:grid-cols-2 gap-x-[80px] gap-y-[60px]"
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(2, 1fr)",
-            columnGap: "80px", // Increased gap between columns
-            rowGap: "60px",    // Increased gap between rows
             maxWidth: "1200px",
             margin: "0 auto",
           }}

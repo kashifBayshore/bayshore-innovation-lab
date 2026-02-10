@@ -75,7 +75,7 @@ const LabCapabilitiesSection: React.FC = () => {
   ];
 
   return (
-    <Section background={figmaColors.backgroundWhite} style={{ overflow: "hidden", minHeight: "700px" }}>
+    <Section background={figmaColors.backgroundWhite} size="sm" style={{ overflow: "hidden", minHeight: "500px" }}>
        <div
         style={{
           maxWidth: figmaSpacing.container.full,
@@ -87,9 +87,9 @@ const LabCapabilitiesSection: React.FC = () => {
           flexWrap: "nowrap", // Ensure side-by-side on desktop
           gap: "0px",
           position: "relative",
-          height: "600px", // Fixed height for alignment container
+          height: "500px", // Fixed height for alignment container
         }}
-        className="flex-col md:flex-row h-auto md:h-[600px]"
+        className="flex-col md:flex-row h-auto md:h-[500px]"
       >
         {/* Left Content */}
         <div 

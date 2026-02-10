@@ -6,7 +6,7 @@ import { Section } from '@/components/ui/Section';
 
 export const Mission: React.FC = () => {
   return (
-    <Section background={figmaColors.backgroundWhite}>
+    <Section background={figmaColors.backgroundWhite} size="sm">
       <div 
         style={{ 
           maxWidth: figmaSpacing.container.full, 

@@ -11,7 +11,7 @@ import { Text } from "@/components/ui/Text";
 
 const InnovationInitiativesSection: React.FC = () => {
   return (
-    <Section background={figmaColors.backgroundWhite} style={{ position: "relative", overflow: "hidden", padding: "100px 0" }}>
+    <Section background={figmaColors.backgroundWhite} size="sm" style={{ position: "relative", overflow: "hidden" }}>
       <div
         style={{
           maxWidth: figmaSpacing.container.full,
@@ -63,11 +63,10 @@ const InnovationInitiativesSection: React.FC = () => {
           style={{
             display: "flex",
             flexDirection: "column",
-            gap: "60px",
-            padding: `0 ${figmaSpacing.section.md}`,
+            gap: "40px",
             zIndex: 10,
           }}
-          className="order-1 md:order-2 text-center md:text-left"
+          className="order-1 md:order-2 text-center md:text-left px-4 md:px-20"
         >
           {/* Main Heading */}
           <Heading
