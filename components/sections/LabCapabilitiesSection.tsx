@@ -31,7 +31,8 @@ const LabCapabilitiesSection: React.FC = () => {
         width: 325, 
         height: 205, 
         direction: "up",
-        svgStyle: { bottom: "-1.5px", left: 0 }
+        xOffset: -40,
+        svgStyle: { bottom: "-1.5px" }
     },
     { 
         title: "Real-time Data Processing & Analytics", 
@@ -72,7 +73,8 @@ const LabCapabilitiesSection: React.FC = () => {
         width: 405, 
         height: 205, 
         direction: "down",
-        svgStyle: { top: "-1.5px", left: 0 }
+        xOffset: -40,
+        svgStyle: { top: "-1.5px" }
     },
   ];
 
@@ -208,6 +210,7 @@ const LabCapabilitiesSection: React.FC = () => {
                             <div style={{ 
                                 position: "absolute", 
                                 ...cap.svgStyle,
+                                left: `${cap.xOffset || 0}px`,
                                 opacity: areCardsVisible ? 1 : 0,
                                 // transform: isVisible ? 'scaleX(1)' : 'scaleX(0)', // Origin left?
                                 // transformOrigin: 'left',
@@ -226,7 +229,7 @@ const LabCapabilitiesSection: React.FC = () => {
                             {/* Card */}
                             <div style={{
                                 position: "absolute",
-                                left: `${cap.width}px`, // Staggered X position
+                                left: `${cap.width + (cap.xOffset || 0)}px`, // Staggered X position
                                 // Calculate Top relative to Center (0)
                                 // Up: -Height - (CardHeight/2)
                                 // Down: +Height - (CardHeight/2)
