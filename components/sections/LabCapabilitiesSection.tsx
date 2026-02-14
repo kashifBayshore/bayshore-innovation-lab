@@ -150,15 +150,17 @@ const LabCapabilitiesSection: React.FC = () => {
               opacity: isSectionVisible ? 1 : 0,
               transform: isSectionVisible ? 'translateX(0)' : 'translateX(-20px)',
               transition: 'opacity 0.8s ease-out, transform 0.8s ease-out',
+              position: "relative",
+              top: "80px", // Pushes the text block down so Heading aligns with Center Dot
             }}
-            className="mb-10 lg:mb-0 text-center lg:text-left w-full lg:w-[391px] lg:mr-[20px]"
+            className="mb-10 lg:mb-0 text-center lg:text-left w-full lg:w-auto lg:flex-1 lg:mr-[20px]"
         >
 
             <Heading level={2} gradient style={{ marginBottom: "20px" }} className="whitespace-normal lg:whitespace-nowrap">
                 Lab Capabilities
             </Heading>
 
-            <Text size="sm" color="secondary" style={{ width: "100%", maxWidth: "450px", lineHeight: "1.6", margin: "0 auto md:0" }}>
+            <Text size="sm" color="secondary" style={{ width: "100%", maxWidth: "100%", lineHeight: "1.6", margin: "0 auto md:0" }}>
                 Our lab is equipped with state-of-the-art infrastructure designed to support complex research and development cycles. From high-performance computing clusters to secure sandboxes for experimentation, we provide the environment necessary to turn ambitious concepts into functional prototypes.
             </Text>
         </div>
