@@ -31,15 +31,15 @@ const LabCapabilitiesSection: React.FC = () => {
         width: 325, 
         height: 205, 
         direction: "up",
-        svgStyle: { bottom: "-2px", left: 0 }
+        svgStyle: { bottom: "-1.5px", left: 0 }
     },
     { 
         title: "Real-time Data Processing & Analytics", 
         svg: "/Rectangle 46.svg", 
         width: 369, 
-        height: 122, 
+        height: 123, 
         direction: "up",
-        svgStyle: { bottom: "-2px", left: 0 }
+        svgStyle: { bottom: "-1.5px", left: 0 }
     },
     { 
         title: "Cloud-Native Architecture Design", 
@@ -47,7 +47,7 @@ const LabCapabilitiesSection: React.FC = () => {
         width: 289, 
         height: 41, 
         direction: "up",
-        svgStyle: { bottom: "-2px", left: 0 }
+        svgStyle: { bottom: "-1.5px", left: 0 }
     },
     // Bottom Set
     { 
@@ -56,15 +56,15 @@ const LabCapabilitiesSection: React.FC = () => {
         width: 369, 
         height: 41, 
         direction: "down",
-        svgStyle: { top: "-2px", left: 0 }
+        svgStyle: { top: "-1.5px", left: 0 }
     },
     { 
         title: "Performance Optimization & Benchmarking", 
         svg: "/Rectangle 46 (1).svg", 
         width: 289, 
-        height: 122, 
+        height: 123, 
         direction: "down",
-        svgStyle: { top: "-2px", left: 0 }
+        svgStyle: { top: "-1.5px", left: 0 }
     },
     { 
         title: "Cross-Platform Integration", 
@@ -72,7 +72,7 @@ const LabCapabilitiesSection: React.FC = () => {
         width: 405, 
         height: 205, 
         direction: "down",
-        svgStyle: { top: "-2px", left: 0 }
+        svgStyle: { top: "-1.5px", left: 0 }
     },
   ];
 
@@ -128,7 +128,7 @@ const LabCapabilitiesSection: React.FC = () => {
          }
        `}</style>
        
-       <div
+      <div
         ref={sectionRef}
         style={{
           maxWidth: figmaSpacing.container.full,
@@ -136,7 +136,7 @@ const LabCapabilitiesSection: React.FC = () => {
           padding: "0 20px",
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "space-between",
           position: "relative",
         }}
         className="flex-col lg:flex-row h-auto lg:h-[500px]"
@@ -163,80 +163,99 @@ const LabCapabilitiesSection: React.FC = () => {
             </Text>
         </div>
 
-        {/* Center Dot */}
-        <div className="hidden lg:block" style={{ 
-            width: "20px", 
-            height: "20px", 
-            backgroundColor: figmaColors.accentCyan, 
-            borderRadius: "50%",
-            flexShrink: 0,
-            zIndex: 20,
-            position: "relative",
-            opacity: isSectionVisible ? 1 : 0,
-            transform: isSectionVisible ? 'scale(1)' : 'scale(0)',
-            transition: 'opacity 0.5s ease-out 0.2s, transform 0.5s ease-out 0.2s',
-        }}></div>
+        {/* Right Visuals Wrapper */}
+        <div className="hidden lg:flex" style={{ width: "860px", height: "100%", alignItems: "center", position: "relative" }}>
+            
+            {/* Center Dot */}
+            <div style={{ 
+                width: "20px", 
+                height: "20px", 
+                backgroundColor: figmaColors.accentCyan, 
+                borderRadius: "50%",
+                flexShrink: 0,
+                zIndex: 20,
+                position: "relative",
+                opacity: isSectionVisible ? 1 : 0,
+                transform: isSectionVisible ? 'scale(1)' : 'scale(0)',
+                transition: 'opacity 0.5s ease-out 0.2s, transform 0.5s ease-out 0.2s',
+            }}></div>
 
-        {/* Tree Container (Large Desktop Only) */}
-        <div className="hidden lg:block" style={{ position: "relative", flexGrow: 1,  height: "100%" }}>
+            {/* Connecting Stem */}
+            <div style={{
+                width: "60px",
+                height: "2px",
+                background: `linear-gradient(90deg, ${figmaColors.accentCyan}, ${figmaColors.accentCyan})`, // Uniform Cyan for stem
+                flexShrink: 0,
+                opacity: areCardsVisible ? 1 : 0,
+                transform: areCardsVisible ? 'scaleX(1)' : 'scaleX(0)',
+                transformOrigin: 'left',
+                transition: 'opacity 0.5s ease-out 0.3s, transform 0.5s ease-out 0.3s',
+                marginLeft: "-1px", // Overlap dot slightly
+                marginRight: "-1px", // Overlap tree slightly
+                zIndex: 15,
+            }}></div>
 
-            {/* The "Center" of this container aligns with the Dot */}
-            <div style={{ position: "absolute", top: "50%", left: 0, width: "100%", height: "0px" }}>
-                {capabilities.map((cap, i) => (
-                    <React.Fragment key={i}>
-                        {/* Line */}
-                        <div style={{ 
-                            position: "absolute", 
-                            ...cap.svgStyle,
-                            opacity: areCardsVisible ? 1 : 0,
-                            // transform: isVisible ? 'scaleX(1)' : 'scaleX(0)', // Origin left?
-                            // transformOrigin: 'left',
-                            transition: `opacity 0.5s ease-out ${0.4 + (i * 0.1)}s`
-                             }}>
-                            <Image 
-                                src={cap.svg} 
-                                alt="" 
-                                width={cap.width} 
-                                height={cap.height} 
-                                style={{ display: "block" }} 
-                                unoptimized
-                            />
-                        </div>
+            {/* Tree Container (Large Desktop Only) */}
+            <div style={{ position: "relative", flexGrow: 1,  height: "100%" }}>
 
-                        {/* Card */}
-                        <div style={{
-                            position: "absolute",
-                            left: `${cap.width}px`, // Staggered X position
-                            // Calculate Top relative to Center (0)
-                            // Up: -Height - (CardHeight/2)
-                            // Down: +Height - (CardHeight/2)
-                            top: cap.direction === "up" 
-                                ? `-${cap.height + 34}px` // 34 is Half Card Height (68/2)
-                                : `${cap.height - 34}px`,
-                            width: "395px",
-                            height: "68px",
-                            backgroundColor: figmaColors.backgroundWhite,
-                            borderRadius: "12px",
-                            boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.05)",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "flex-start", // Left align text inside card
-                            padding: "0 20px",
-                            border: `1px solid ${figmaColors.borderLight}`,
-                            zIndex: 10,
-                            opacity: areCardsVisible ? 1 : 0,
-                            transform: areCardsVisible ? 'translateX(0)' : 'translateX(20px)',
-                            transition: `opacity 0.6s ease-out ${0.6 + (i * 0.1)}s, transform 0.6s ease-out ${0.6 + (i * 0.1)}s`,
-                            cursor: 'default',
-                        }}
-                        className="hover:scale-105 transition-transform duration-300"
-                        >
-                             <Text size="sm" weight="medium" style={{ fontSize: "14px", color: figmaColors.textPrimary }}>
-                                {cap.title}
-                             </Text>
-                        </div>
-                    </React.Fragment>
-                ))}
+                {/* The "Center" of this container aligns with the Dot */}
+                <div style={{ position: "absolute", top: "50%", left: 0, width: "100%", height: "0px" }}>
+                    {capabilities.map((cap, i) => (
+                        <React.Fragment key={i}>
+                            {/* Line */}
+                            <div style={{ 
+                                position: "absolute", 
+                                ...cap.svgStyle,
+                                opacity: areCardsVisible ? 1 : 0,
+                                // transform: isVisible ? 'scaleX(1)' : 'scaleX(0)', // Origin left?
+                                // transformOrigin: 'left',
+                                transition: `opacity 0.5s ease-out ${0.4 + (i * 0.1)}s`
+                                }}>
+                                <Image 
+                                    src={cap.svg} 
+                                    alt="" 
+                                    width={cap.width} 
+                                    height={cap.height} 
+                                    style={{ display: "block" }} 
+                                    unoptimized
+                                />
+                            </div>
+
+                            {/* Card */}
+                            <div style={{
+                                position: "absolute",
+                                left: `${cap.width}px`, // Staggered X position
+                                // Calculate Top relative to Center (0)
+                                // Up: -Height - (CardHeight/2)
+                                // Down: +Height - (CardHeight/2)
+                                top: cap.direction === "up" 
+                                    ? `-${cap.height + 34}px` // 34 is Half Card Height (68/2)
+                                    : `${cap.height - 34}px`,
+                                width: "395px",
+                                height: "68px",
+                                backgroundColor: figmaColors.backgroundWhite,
+                                borderRadius: "12px",
+                                boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.05)",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "flex-start", // Left align text inside card
+                                padding: "0 20px",
+                                border: `1px solid ${figmaColors.borderLight}`,
+                                zIndex: 10,
+                                opacity: areCardsVisible ? 1 : 0,
+                                transform: areCardsVisible ? 'translateX(0)' : 'translateX(20px)',
+                                transition: `opacity 0.6s ease-out ${0.6 + (i * 0.1)}s, transform 0.6s ease-out ${0.6 + (i * 0.1)}s`,
+                                cursor: 'default',
+                            }}
+                            className="hover:scale-105 transition-transform duration-300"
+                            >
+                                <Text size="sm" weight="medium" style={{ fontSize: "14px", color: figmaColors.textPrimary }}>
+                                    {cap.title}
+                                </Text>
+                            </div>
+                        </React.Fragment>
+                    ))}
+                </div>
             </div>
         </div>
 
