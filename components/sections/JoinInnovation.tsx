@@ -1,6 +1,6 @@
 import React from 'react';
-import Image from 'next/image';
 import { Heading } from '@/components/ui/Heading';
+import { LeftDecoration, RightDecoration } from './JoinInnovationAssets';
 import { Text } from '@/components/ui/Text';
 import { Button } from '@/components/ui/Button';
 import { figmaColors, figmaSpacing } from '@/tokens/figma-design';
@@ -49,14 +49,8 @@ export const JoinInnovation: React.FC = () => {
         }}>
             
             {/* Left Decoration */}
-            {/* Group 415.svg - Wide Left, Pointy Right -> Pointy connects to Button on Right */}
             <div className="hidden md:block" style={{ marginRight: '-10px' }}>
-                <Image 
-                    src="/Group 415.svg" 
-                    alt="" 
-                    width={708} 
-                    height={193} 
-                />
+                <LeftDecoration />
             </div>
 
             {/* Button */}
@@ -78,14 +72,8 @@ export const JoinInnovation: React.FC = () => {
             </div>
 
             {/* Right Decoration */}
-            {/* Group 416.svg - Pointy Left, Wide Right -> Pointy connects to Button on Left */}
             <div className="hidden md:block" style={{ marginLeft: '-10px' }}>
-                <Image 
-                    src="/Group 416.svg" 
-                    alt="" 
-                    width={708} 
-                    height={193} 
-                />
+                <RightDecoration />
             </div>
 
         </div>
