@@ -68,12 +68,16 @@ export const OurProductsSection: React.FC = () => {
                   backgroundColor: figmaColors.backgroundWhite,
                   borderRadius: "20px",
                   padding: "40px",
-                  boxShadow: figmaColors.cardShadow,
+                  boxShadow: "0 20px 40px -5px rgba(0,0,0,0.08)", // Cleaner shadow to remove top-edge artifacts
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "flex-start",
                   gap: "20px",
-                  height: "100%", // Ensure card fills grid cell height
+                  height: "100%", 
+                  border: "none",
+                  outline: "none",
+                  position: "relative",
+                  zIndex: 2,
                 }}
               >
               {/* Asset Icon */}
@@ -85,6 +89,8 @@ export const OurProductsSection: React.FC = () => {
                   alignItems: "center",
                   justifyContent: "center",
                   marginBottom: "10px",
+                  marginTop: "4px", // Push down slightly
+                  overflow: "hidden", // Clip any stray SVG paths
                 }}
               >
                 <Image
