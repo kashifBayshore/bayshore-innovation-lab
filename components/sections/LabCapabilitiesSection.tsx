@@ -212,9 +212,8 @@ const LabCapabilitiesSection: React.FC = () => {
                                 ...cap.svgStyle,
                                 left: `${cap.xOffset || 0}px`,
                                 opacity: areCardsVisible ? 1 : 0,
-                                // transform: isVisible ? 'scaleX(1)' : 'scaleX(0)', // Origin left?
-                                // transformOrigin: 'left',
-                                transition: `opacity 0.5s ease-out ${0.4 + (i * 0.1)}s`
+                                clipPath: areCardsVisible ? 'inset(0 0 0 0)' : 'inset(0 100% 0 0)',
+                                transition: `opacity 0.5s ease-out ${0.4 + (i * 0.1)}s, clip-path 1s cubic-bezier(0.65, 0, 0.35, 1) ${0.4 + (i * 0.1)}s`
                                 }}>
                                 <Image 
                                     src={cap.svg} 
@@ -226,37 +225,41 @@ const LabCapabilitiesSection: React.FC = () => {
                                 />
                             </div>
 
-                            {/* Card */}
+                            {/* Card Wrapper for Positioning & Entrance */}
                             <div style={{
                                 position: "absolute",
-                                left: `${cap.width + (cap.xOffset || 0)}px`, // Staggered X position
-                                // Calculate Top relative to Center (0)
-                                // Up: -Height - (CardHeight/2)
-                                // Down: +Height - (CardHeight/2)
+                                left: `${cap.width + (cap.xOffset || 0)}px`,
                                 top: cap.direction === "up" 
-                                    ? `-${cap.height + 34}px` // 34 is Half Card Height (68/2)
+                                    ? `-${cap.height + 34}px` 
                                     : `${cap.height - 34}px`,
-                                width: "395px",
-                                height: "68px",
-                                backgroundColor: figmaColors.backgroundWhite,
-                                borderRadius: "12px",
-                                boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.05)",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "flex-start", // Left align text inside card
-                                padding: "0 20px",
-                                border: `1px solid ${figmaColors.borderLight}`,
                                 zIndex: 10,
                                 opacity: areCardsVisible ? 1 : 0,
-                                transform: areCardsVisible ? 'translateX(0)' : 'translateX(20px)',
-                                transition: `opacity 0.6s ease-out ${0.6 + (i * 0.1)}s, transform 0.6s ease-out ${0.6 + (i * 0.1)}s`,
-                                cursor: 'default',
-                            }}
-                            className="hover:scale-105 transition-transform duration-300"
-                            >
-                                <Text size="sm" weight="medium" style={{ fontSize: "14px", color: figmaColors.textPrimary }}>
-                                    {cap.title}
-                                </Text>
+                                transform: areCardsVisible ? 'scale(1)' : 'scale(0)',
+                                transformOrigin: cap.direction === "up" ? "bottom left" : "top left", // Scale from the connection point
+                                transition: `opacity 0.6s ease-out ${0.6 + (i * 0.1)}s, transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) ${0.6 + (i * 0.1)}s`, // Bouncy pop
+                            }}>
+                                {/* Inner Card for Styling & Floating Animation */}
+                                <div style={{
+                                    width: "395px",
+                                    height: "68px",
+                                    backgroundColor: figmaColors.backgroundWhite,
+                                    borderRadius: "12px",
+                                    boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.05)",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "flex-start",
+                                    padding: "0 20px",
+                                    border: `1px solid ${figmaColors.borderLight}`,
+                                    cursor: 'default',
+                                    animation: `float 4s ease-in-out infinite`,
+                                    animationDelay: `${i * 0.7}s`, // Staggered float
+                                }}
+                                className="hover:scale-105 transition-transform duration-300"
+                                >
+                                    <Text size="sm" weight="medium" style={{ fontSize: "14px", color: figmaColors.textPrimary }}>
+                                        {cap.title}
+                                    </Text>
+                                </div>
                             </div>
                         </React.Fragment>
                     ))}
