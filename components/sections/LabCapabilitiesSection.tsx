@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import {
   figmaColors,
@@ -74,9 +76,60 @@ const LabCapabilitiesSection: React.FC = () => {
     },
   ];
 
+  const sectionRef = useRef<HTMLDivElement>(null);
+  // Separate visibility states:
+  // isSectionVisible: Controls the permanent entrance of the header/text.
+  // areCardsVisible: Controls the looping animation of Lines & Cards.
+  const [isSectionVisible, setIsSectionVisible] = useState(false);
+  const [areCardsVisible, setAreCardsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsSectionVisible(true);
+          setAreCardsVisible(true);
+          observer.disconnect(); // Animate section once
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Loop animation for CARDS ONLY every 25 seconds
+  useEffect(() => {
+    if (!isSectionVisible) return;
+
+    const intervalId = setInterval(() => {
+      setAreCardsVisible(false);
+      setTimeout(() => {
+        setAreCardsVisible(true);
+      }, 500); 
+    }, 25000); // 25 seconds
+
+    return () => clearInterval(intervalId);
+  }, [isSectionVisible]); // Start loop once section is visible
+
   return (
     <Section background={figmaColors.backgroundPrimary} size="sm" style={{ overflow: "hidden", minHeight: "500px" }}>
+       
+       {/* Style for hover effects if needed, though using JS for main entrance */}
+       <style jsx global>{`
+         @keyframes float {
+           0% { transform: translateY(0px); }
+           50% { transform: translateY(-5px); }
+           100% { transform: translateY(0px); }
+         }
+       `}</style>
+       
        <div
+        ref={sectionRef}
         style={{
           maxWidth: figmaSpacing.container.full,
           margin: "0 auto",
@@ -91,7 +144,13 @@ const LabCapabilitiesSection: React.FC = () => {
 
         {/* Left Content */}
         <div 
-            style={{ flexShrink: 0, zIndex: 10 }}
+            style={{ 
+              flexShrink: 0, 
+              zIndex: 10,
+              opacity: isSectionVisible ? 1 : 0,
+              transform: isSectionVisible ? 'translateX(0)' : 'translateX(-20px)',
+              transition: 'opacity 0.8s ease-out, transform 0.8s ease-out',
+            }}
             className="mb-10 lg:mb-0 text-center lg:text-left w-full lg:w-[391px] lg:mr-[20px]"
         >
 
@@ -113,18 +172,27 @@ const LabCapabilitiesSection: React.FC = () => {
             flexShrink: 0,
             zIndex: 20,
             position: "relative",
+            opacity: isSectionVisible ? 1 : 0,
+            transform: isSectionVisible ? 'scale(1)' : 'scale(0)',
+            transition: 'opacity 0.5s ease-out 0.2s, transform 0.5s ease-out 0.2s',
         }}></div>
 
         {/* Tree Container (Large Desktop Only) */}
         <div className="hidden lg:block" style={{ position: "relative", flexGrow: 1,  height: "100%" }}>
 
-            
             {/* The "Center" of this container aligns with the Dot */}
             <div style={{ position: "absolute", top: "50%", left: 0, width: "100%", height: "0px" }}>
                 {capabilities.map((cap, i) => (
                     <React.Fragment key={i}>
                         {/* Line */}
-                        <div style={{ position: "absolute", ...cap.svgStyle }}>
+                        <div style={{ 
+                            position: "absolute", 
+                            ...cap.svgStyle,
+                            opacity: areCardsVisible ? 1 : 0,
+                            // transform: isVisible ? 'scaleX(1)' : 'scaleX(0)', // Origin left?
+                            // transformOrigin: 'left',
+                            transition: `opacity 0.5s ease-out ${0.4 + (i * 0.1)}s`
+                             }}>
                             <Image 
                                 src={cap.svg} 
                                 alt="" 
@@ -156,7 +224,13 @@ const LabCapabilitiesSection: React.FC = () => {
                             padding: "0 20px",
                             border: `1px solid ${figmaColors.borderLight}`,
                             zIndex: 10,
-                        }}>
+                            opacity: areCardsVisible ? 1 : 0,
+                            transform: areCardsVisible ? 'translateX(0)' : 'translateX(20px)',
+                            transition: `opacity 0.6s ease-out ${0.6 + (i * 0.1)}s, transform 0.6s ease-out ${0.6 + (i * 0.1)}s`,
+                            cursor: 'default',
+                        }}
+                        className="hover:scale-105 transition-transform duration-300"
+                        >
                              <Text size="sm" weight="medium" style={{ fontSize: "14px", color: figmaColors.textPrimary }}>
                                 {cap.title}
                              </Text>
@@ -180,6 +254,9 @@ const LabCapabilitiesSection: React.FC = () => {
                      justifyContent: "center",
                      padding: "12px 20px",
                      border: `1px solid ${figmaColors.borderLight}`,
+                     opacity: areCardsVisible ? 1 : 0,
+                     transform: areCardsVisible ? 'translateY(0)' : 'translateY(20px)',
+                     transition: `opacity 0.6s ease-out ${0.2 + (i * 0.1)}s, transform 0.6s ease-out ${0.2 + (i * 0.1)}s`
                  }}>
                      <Text size="sm" weight="medium" style={{ textAlign: "center", fontSize: "14px" }}>{cap.title}</Text>
                  </div>
