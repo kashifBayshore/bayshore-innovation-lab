@@ -7,6 +7,9 @@ import { Button } from "@/components/ui/Button";
 import { Text } from "@/components/ui/Text";
 import { contactSchema, ContactFormData } from "@/lib/schemas/contact.validation";
 import { ZodError, ZodIssue } from "zod";
+import 'react-phone-number-input/style.css'
+// @ts-ignore
+import PhoneInput, { parsePhoneNumber, isValidPhoneNumber } from 'react-phone-number-input'
 
 export const ContactForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) => {
   const [formData, setFormData] = useState<ContactFormData>({
@@ -34,6 +37,13 @@ export const ContactForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess })
   const validate = (): boolean => {
     try {
       contactSchema.parse(formData);
+      
+      // Strict Phone Validation
+      if (formData.phone && !isValidPhoneNumber(formData.phone)) {
+        setErrors((prev) => ({ ...prev, phone: "Invalid phone number for the selected country." }));
+        return false;
+      }
+
       setErrors({});
       return true;
     } catch (error) {
@@ -58,11 +68,25 @@ export const ContactForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess })
 
     setIsSubmitting(true);
 
+    // Format phone number with dash separation: +Code-Number
+    let payload = { ...formData };
+    if (formData.phone) {
+        try {
+            const parsed = parsePhoneNumber(formData.phone);
+            if (parsed) {
+                payload.phone = `+${parsed.countryCallingCode}-${parsed.nationalNumber}`;
+            }
+        } catch (e) {
+            // Fallback if parsing fails (should be caught by validate ideally)
+            console.error("Phone formatting error", e);
+        }
+    }
+
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
 
       const data = await response.json();
@@ -154,14 +178,56 @@ export const ContactForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess })
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
-          <input
-            type="tel"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            style={inputStyle}
-            placeholder="+1 (555) 000-0000"
-          />
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            border: `1px solid ${figmaColors.borderLight}`,
+            borderRadius: figmaSpacing.borderRadius.sm,
+            padding: '4px 12px',
+            backgroundColor: 'white',
+          }}>
+             <style dangerouslySetInnerHTML={{
+               __html: `
+                .PhoneInputCountry {
+                    margin-right: 8px !important;
+                    position: relative;
+                }
+                .PhoneInputCountry::after {
+                    content: "-";
+                    position: absolute;
+                    right: -6px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    color: ${figmaColors.textSecondary};
+                    font-weight: bold;
+                    pointer-events: none;
+                }
+                .PhoneInputInput {
+                    padding-left: 8px !important;
+                }
+               `
+             }} />
+             <PhoneInput
+                placeholder="Enter phone number"
+                value={formData.phone}
+                onChange={(value: any) => {
+                    setFormData((prev) => ({ ...prev, phone: value || "" }));
+                    if (errors.phone) {
+                        setErrors((prev) => ({ ...prev, phone: undefined }));
+                    }
+                }}
+                defaultCountry="US"
+                style={{
+                  border: 'none',
+                  outline: 'none',
+                  width: '100%',
+                  fontSize: figmaTypography.fontSize.sm,
+                  backgroundColor: 'transparent',
+                }}
+                className="w-full focus:outline-none"
+             />
+          </div>
+          {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
         </div>
       </div>
 
