@@ -1,12 +1,18 @@
-import React from 'react';
+"use client";
+
+import React, { useState } from 'react';
 import { Heading } from '@/components/ui/Heading';
 import { LeftDecoration, RightDecoration } from './JoinInnovationAssets';
 import { Text } from '@/components/ui/Text';
 import { Button } from '@/components/ui/Button';
 import { figmaColors, figmaSpacing } from '@/tokens/figma-design';
 import { Section } from '@/components/ui/Section';
+import { Modal } from '@/components/ui/Modal';
+import { ContactForm } from '@/components/features/ContactForm';
 
 export const JoinInnovation: React.FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <Section background={figmaColors.backgroundWhite} size="sm">
       <div 
@@ -57,6 +63,7 @@ export const JoinInnovation: React.FC = () => {
             <div style={{ zIndex: 10 }}>
                 <Button 
                     size="lg"
+                    onClick={() => setIsModalOpen(true)}
                     style={{
                         backgroundColor: figmaColors.accentCyan, // From screenshot
                         borderRadius: "8px", // Slightly rounded
@@ -78,13 +85,15 @@ export const JoinInnovation: React.FC = () => {
 
         </div>
 
-        {/* Bottom Line (Already existing in Page.tsx, maybe move it here if this component replaces current code) 
-           The screenshot shows the bottom line at 707.5 x 192 location... wait.
-           The screenshot shows the Group 415/416 ARE the lines.
-           And there is a bottom border of 1px at the very bottom of the CONTAINER (1440x354).
-           
-           I will add the bottom border to the section itself or a div at bottom.
-        */}
+        {/* Modal Integration */}
+        <Modal 
+          isOpen={isModalOpen} 
+          onClose={() => setIsModalOpen(false)}
+          title="Get in Touch"
+        >
+          <ContactForm onSuccess={() => setTimeout(() => setIsModalOpen(false), 2000)} />
+        </Modal>
+
       </div>
       
       {/* Bottom Separator Line */}
@@ -103,3 +112,4 @@ export const JoinInnovation: React.FC = () => {
     </Section>
   );
 };
+

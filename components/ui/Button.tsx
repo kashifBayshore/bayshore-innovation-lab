@@ -9,6 +9,7 @@ interface ButtonProps {
   onClick?: () => void;
   disabled?: boolean;
   style?: React.CSSProperties;
+  type?: "button" | "submit" | "reset";
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -19,6 +20,7 @@ export const Button: React.FC<ButtonProps> = ({
   onClick,
   disabled = false,
   style,
+  type = "button",
 }) => {
   const baseStyles: React.CSSProperties = {
     fontFamily: figmaTypography.fontFamily.openSans.join(", "),
@@ -83,7 +85,7 @@ export const Button: React.FC<ButtonProps> = ({
       className={className}
       onClick={onClick}
       disabled={disabled}
-      type="button"
+      type={type}
     >
       {children}
     </button>
