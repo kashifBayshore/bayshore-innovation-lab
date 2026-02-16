@@ -48,7 +48,7 @@ const ResearchAreasSection: React.FC = () => {
   ];
 
   return (
-    <Section background={figmaColors.backgroundPrimary} size="md" style={{ position: "relative", overflow: "visible" }} className="py-10 md:py-24">
+    <Section background={figmaColors.backgroundPrimary} size="md" style={{ position: "relative", overflow: "visible" }} className="pt-10 pb-10 md:py-24">
       <div
         style={{
           maxWidth: figmaSpacing.container.full,

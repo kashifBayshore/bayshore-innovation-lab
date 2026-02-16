@@ -64,7 +64,7 @@ export const OurProductsSection: React.FC = () => {
     }, []);
 
   return (
-    <Section background={figmaColors.backgroundPrimary} size="md">
+    <Section background={figmaColors.backgroundPrimary} size="md" className="pb-5">
       <div
         style={{
           maxWidth: figmaSpacing.container.full,
