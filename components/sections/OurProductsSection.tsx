@@ -51,13 +51,13 @@ export const OurProductsSection: React.FC = () => {
         </Heading>
 
         <div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-[30px]"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[repeat(20,minmax(0,1fr))] gap-[30px]"
         >
           {products.map((product, index) => {
             // Alternating pattern for Desktop (lg+): 
-            // Card 1: 5 cols, Card 2: 7 cols, Card 3: 7 cols, Card 4: 5 cols
-            // Tablet (md): 2 columns, so spans are simple.
-            const colSpanClass = (index === 0 || index === 3) ? "lg:col-span-5" : "lg:col-span-7";
+            // 20-column grid allows for 45/55 split (9/20 and 11/20)
+            // Card 1: 9 cols, Card 2: 11 cols, Card 3: 11 cols, Card 4: 9 cols
+            const colSpanClass = (index === 0 || index === 3) ? "lg:col-span-[9]" : "lg:col-span-[11]";
             
             return (
 
@@ -67,12 +67,12 @@ export const OurProductsSection: React.FC = () => {
                 style={{
                   backgroundColor: figmaColors.backgroundWhite,
                   borderRadius: "20px",
-                  padding: "40px",
+                  padding: "24px",
                   boxShadow: "0 20px 40px -5px rgba(0,0,0,0.08)", // Cleaner shadow to remove top-edge artifacts
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "flex-start",
-                  gap: "20px",
+                  gap: "16px",
                   height: "100%", 
                   border: "none",
                   outline: "none",
