@@ -213,13 +213,9 @@ export const HeroSection: React.FC = () => {
             right: "6px", // Matches figmaSpacing.positioning.logoLeft for symmetry
             top: "50%",
             transform: "translateY(-50%)",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "24px",
             zIndex: 50,
           }}
-          className="hidden xl:flex" // Only visible on large desktop
+          className="hidden xl:flex flex-col items-center gap-6" // Only visible on large desktop
         >
           {/* Social Links */}
           <div style={{ display: "flex", flexDirection: "column", gap: "20px", alignItems: "center" }}>
