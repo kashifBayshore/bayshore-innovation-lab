@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
 import {
   figmaColors,
@@ -6,8 +8,12 @@ import {
   figmaSpacing,
 } from "@/tokens/figma-design";
 import { Button } from "@/components/ui/Button";
+import { Modal } from '@/components/ui/Modal';
+import { ContactForm } from '@/components/features/ContactForm';
 
 export const HeroSection: React.FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <section
       className="py-8 md:py-14 lg:py-16 landscape:py-6"
@@ -122,6 +128,7 @@ export const HeroSection: React.FC = () => {
                 <div style={{ marginTop: "10px" }}>
                     <Button 
                         size="lg"
+                        onClick={() => setIsModalOpen(true)}
                         style={{
                             background: figmaColors.buttonGradient,
                             color: "white",
@@ -275,6 +282,16 @@ export const HeroSection: React.FC = () => {
           `}} />
         </div>
       </div>
+      
+      {/* Modal Integration */}
+      <Modal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)}
+        title="Get in Touch"
+      >
+        <ContactForm onSuccess={() => setTimeout(() => setIsModalOpen(false), 2000)} />
+      </Modal>
+
     </section>
   );
 };
