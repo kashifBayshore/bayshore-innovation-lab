@@ -4,6 +4,7 @@ import { Text } from "@/components/ui/Text";
 import { Heading } from "@/components/ui/Heading";
 import { figmaColors, figmaSpacing } from "@/tokens/figma-design";
 import { Button } from "@/components/ui/Button";
+import { NewsletterForm } from "@/components/newsletter/NewsletterForm";
 
 export const Footer: React.FC = () => {
   return (
@@ -95,25 +96,13 @@ export const Footer: React.FC = () => {
           <Heading level={4} style={{ fontSize: "16px", fontWeight: "bold", marginBottom: "20px", textTransform: "uppercase" }}>
             JOIN OUR NEWSLETTER
           </Heading>
+
           <Text size="sm" color="secondary" style={{ marginBottom: "10px" }}>
             Your Email
           </Text>
-          <div className="flex flex-col sm:flex-row gap-[10px] mb-5 w-full">
-             <input 
-                type="email" 
-                placeholder="Enter Your Email"
-                style={{
-                    flex: 1,
-                    padding: "10px 15px",
-                    borderRadius: "8px",
-                    border: `1px solid ${figmaColors.borderLight}`,
-                    fontSize: "14px",
-                    outline: "none"
-                }}
-             />
-             <Button size="sm" style={{ backgroundColor: figmaColors.accentCyan, color: "white" }}>
-                Subscribe
-             </Button>
+          
+          <div className="mb-5 w-full">
+            <NewsletterForm />
           </div>
           
           {/* Social Icons - Unified 24px spacing */}

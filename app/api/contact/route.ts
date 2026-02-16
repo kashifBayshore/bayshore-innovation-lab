@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
                 ...validatedData,
                 isVerified 
             },
-            { new: true }
+            { returnDocument: 'after' }
         );
         console.log("Updated placeholder contact:", savedContact?._id);
     } else {
