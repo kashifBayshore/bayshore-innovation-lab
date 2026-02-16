@@ -44,7 +44,7 @@ const ContactSchema: Schema = new Schema(
     },
     message: {
       type: String,
-      required: [true, 'Please provide a message.'],
+      trim: true,
     },
     otp: {
       type: String,

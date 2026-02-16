@@ -252,7 +252,7 @@ export const ContactForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess })
     <form onSubmit={handleSubmit} className="space-y-4">
       {/* Name */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Name <span className="text-red-500">*</span></label>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
         <input
           type="text"
           name="name"
@@ -267,7 +267,7 @@ export const ContactForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess })
 
       {/* Email Verification Section */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Email <span className="text-red-500">*</span></label>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
         <div className="flex gap-2">
             <input
               type="email"
@@ -358,7 +358,7 @@ export const ContactForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess })
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Phone <span className="text-red-500">*</span></label>
           <div style={{
             display: 'flex',
             alignItems: 'center',
@@ -414,7 +414,7 @@ export const ContactForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess })
 
       {/* Message */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Message <span className="text-red-500">*</span></label>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Message</label>
         <textarea
           name="message"
           value={formData.message}
