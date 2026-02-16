@@ -122,8 +122,7 @@ const ResearchAreasSection: React.FC = () => {
         <div
           className="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-20"
           style={{
-            maxWidth: "1272px",
-            margin: "0 auto",
+            width: "100%",
           }}
         >
           {researchAreas.map((area, index) => (
@@ -132,7 +131,7 @@ const ResearchAreasSection: React.FC = () => {
               style={{
                 display: "flex",
                 flexDirection: "column",
-                gap: "24px",
+                gap: "16px",
               }}
             >
               <div
@@ -151,7 +150,7 @@ const ResearchAreasSection: React.FC = () => {
                 />
               </div>
 
-              <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
                 <h3
                   style={{
                     fontFamily: "'Open Sans', sans-serif",
@@ -163,17 +162,17 @@ const ResearchAreasSection: React.FC = () => {
                 >
                   {area.title}
                 </h3>
-                <Text 
-                  size="sm" 
-                  color="secondary" 
-                  style={{ 
-                    lineHeight: "1.6", 
-                    color: figmaColors.textSecondary,
-                    maxWidth: "520px"
-                  }}
-                >
-                  {area.description}
-                </Text>
+                  <Text 
+                    size="sm" 
+                    color="secondary" 
+                    style={{ 
+                      lineHeight: "1.6", 
+                      color: figmaColors.textSecondary,
+                      maxWidth: "100%"
+                    }}
+                  >
+                    {area.description}
+                  </Text>
               </div>
             </div>
           ))}
