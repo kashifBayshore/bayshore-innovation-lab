@@ -4,7 +4,7 @@
 import React, { useState } from "react";
 import { figmaColors, figmaSpacing, figmaTypography } from "@/tokens/figma-design";
 import { Button } from "@/components/ui/Button";
-import { Text } from "@/components/ui/Text";
+import { Modal } from "@/components/ui/Modal";
 import { contactSchema, ContactFormData } from "@/lib/schemas/contact.validation";
 import { ZodError, ZodIssue } from "zod";
 import 'react-phone-number-input/style.css'
@@ -25,12 +25,121 @@ export const ContactForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess })
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
+  // Email Verification State
+  const [isEmailVerified, setIsEmailVerified] = useState(false);
+  const [isVerifyingEmail, setIsVerifyingEmail] = useState(false);
+  const [otpSent, setOtpSent] = useState(false);
+  const [otp, setOtp] = useState("");
+  const [otpError, setOtpError] = useState<string | null>(null);
+  const [isOtpModalOpen, setIsOtpModalOpen] = useState(false);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     // Clear error when user types
     if (errors[name as keyof ContactFormData]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
+    }
+    // If email changes, reset verification
+    if (name === "email" && isEmailVerified) {
+        setIsEmailVerified(false);
+    }
+    if (name === "email" && otpSent) {
+        setOtpSent(false);
+        setOtp("");
+    }
+  };
+
+  const handleVerifyEmailStart = async () => {
+    // Validate email format first
+    const emailResult = contactSchema.pick({ email: true }).safeParse({ email: formData.email });
+    if (!emailResult.success) {
+        setErrors((prev) => ({ ...prev, email: emailResult.error.issues[0].message }));
+        return;
+    }
+
+    setIsVerifyingEmail(true);
+    setOtpError(null);
+
+    try {
+        // Step 1: Check if already verified
+        const checkRes = await fetch("/api/check-email-verified", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email: formData.email }),
+        });
+        const checkData = await checkRes.json();
+
+        if (checkData.success && checkData.data.isVerified) {
+            setIsEmailVerified(true);
+            setIsVerifyingEmail(false);
+            return;
+        }
+
+        // Step 2: Send OTP
+        await sendOtp();
+        
+    } catch (error: any) {
+        setOtpError(error.message);
+    } finally {
+        setIsVerifyingEmail(false);
+    }
+  };
+
+  const sendOtp = async () => {
+        const sendRes = await fetch("/api/send-email-otp", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email: formData.email }),
+        });
+        const sendData = await sendRes.json();
+
+        if (!sendData.success) {
+            throw new Error(sendData.message || "Failed to send OTP");
+        }
+
+        setOtpSent(true);
+        setIsOtpModalOpen(true);
+  };
+  
+  const handleResendOtp = async () => {
+      setOtpError(null);
+      setIsVerifyingEmail(true); // Reuse loading state or add specific one
+      try {
+          await sendOtp();
+      } catch (error: any) {
+          setOtpError(error.message);
+      } finally {
+          setIsVerifyingEmail(false);
+      }
+  };
+
+  const handleVerifyOtp = async () => {
+    if (otp.length !== 6) {
+        setOtpError("Please enter a 6-digit code.");
+        return;
+    }
+    setIsVerifyingEmail(true);
+    setOtpError(null);
+    try {
+        const res = await fetch("/api/verify-email-otp", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email: formData.email, otp }),
+        });
+        const data = await res.json();
+
+        if (data.success) {
+            setIsEmailVerified(true);
+            setOtpSent(false); 
+            setIsOtpModalOpen(false); // Close modal
+        } else {
+            setOtpError(data.message || "Invalid Code");
+        }
+    } catch (error: any) {
+        setOtpError(error.message);
+    } finally {
+        setIsVerifyingEmail(false);
     }
   };
 
@@ -64,7 +173,14 @@ export const ContactForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess })
     e.preventDefault();
     setSubmitError(null);
 
+    // Validate Form
     if (!validate()) return;
+
+    // Verify Email Status
+    if (!isEmailVerified) {
+        setSubmitError("Please verify your email address before submitting.");
+        return;
+    }
 
     setIsSubmitting(true);
 
@@ -77,7 +193,6 @@ export const ContactForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess })
                 payload.phone = `+${parsed.countryCallingCode}-${parsed.nationalNumber}`;
             }
         } catch (e) {
-            // Fallback if parsing fails (should be caught by validate ideally)
             console.error("Phone formatting error", e);
         }
     }
@@ -97,6 +212,7 @@ export const ContactForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess })
 
       setSubmitSuccess(true);
       setFormData({ name: "", email: "", company: "", phone: "", message: "" }); // Reset form
+      setIsEmailVerified(false); // Reset verification for next submission
       if (onSuccess) {
         setTimeout(onSuccess, 2000); // Close modal after success message
       }
@@ -149,18 +265,83 @@ export const ContactForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess })
         {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
       </div>
 
-      {/* Email */}
+      {/* Email Verification Section */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">Email <span className="text-red-500">*</span></label>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          style={inputStyle}
-          placeholder="you@company.com"
-        />
+        <div className="flex gap-2">
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              style={{ ...inputStyle, flex: 1 }}
+              placeholder="you@company.com"
+              disabled={isEmailVerified || isOtpModalOpen} 
+            />
+            
+            {/* Verify Button or Status Badge */}
+            {isEmailVerified ? (
+                 <div className="flex items-center px-4 bg-green-100 text-green-700 rounded-md font-medium text-sm whitespace-nowrap">
+                   ✓ Verified
+                 </div>
+            ) : (
+                <Button 
+                    type="button" 
+                    onClick={handleVerifyEmailStart}
+                    disabled={isVerifyingEmail || !formData.email}
+                    variant="secondary"
+                    style={{ height: "auto" }}
+                >
+                    {isVerifyingEmail ? "Checking..." : "Verify Email"}
+                </Button>
+            )}
+        </div>
         {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+        
+        {/* OTP Modal */}
+        <Modal
+            isOpen={isOtpModalOpen}
+            onClose={() => setIsOtpModalOpen(false)}
+            title="Verify Your Email"
+        >
+            <div className="space-y-6 py-2">
+                <p className="text-gray-600 text-center">
+                    We've sent a 6-digit verification code to <br />
+                    <span className="font-semibold text-gray-900 block mt-1 text-lg">{formData.email}</span>
+                </p>
+                
+                <input 
+                    type="text" 
+                    placeholder="000000"
+                    value={otp}
+                    onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                    className="w-full p-4 border border-gray-300 rounded-lg text-center tracking-[1em] font-mono text-2xl outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all bg-gray-50 uppercase placeholder-gray-300"
+                    autoFocus
+                />
+                
+                {otpError && <p className="text-red-500 text-sm text-center bg-red-50 p-2 rounded-md font-medium">{otpError}</p>}
+
+                <div className="flex gap-4 pt-4">
+                    <Button 
+                        type="button"
+                        onClick={handleResendOtp}
+                        variant="secondary"
+                        className="flex-1 py-3"
+                        disabled={isVerifyingEmail}
+                    >
+                        Resend
+                    </Button>
+                    <Button 
+                        type="button"
+                        onClick={handleVerifyOtp}
+                        className="flex-1 py-3"
+                        disabled={isVerifyingEmail || otp.length !== 6}
+                    >
+                        {isVerifyingEmail ? "Verifying..." : "Verify"}
+                    </Button>
+                </div>
+            </div>
+        </Modal>
       </div>
 
       {/* Company & Phone (Grid) */}
@@ -256,15 +437,16 @@ export const ContactForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess })
         <Button
           type="submit"
           className="w-full justify-center"
-          disabled={isSubmitting}
+          disabled={isSubmitting || !isEmailVerified} 
           style={{ 
             width: "100%", 
-            background: figmaColors.primaryGradient,
-            color: "white",
+            background: isEmailVerified ? figmaColors.primaryGradient : figmaColors.borderLight, // Visually verify requirement
+            cursor: isEmailVerified ? "pointer" : "not-allowed",
+            color: isEmailVerified ? "white" : figmaColors.textMuted,
             height: "48px"
           }}
         >
-          {isSubmitting ? "Sending..." : "Send Message"}
+          {isSubmitting ? "Sending..." : (isEmailVerified ? "Send Message" : "Verify Email to Continue")}
         </Button>
       </div>
     </form>

@@ -24,10 +24,33 @@ export async function POST(req: NextRequest) {
     // Connect to the database
     await dbConnect();
 
-    // Create a new contact entry
-    const newContact = await Contact.create(validatedData);
+    // Check if the email is already verified in the system (from OTP flow)
+    // We also want to find if there is a placeholder entry ("Verify Pending") created by the OTP flow
+    const existingContact = await Contact.findOne({ email: validatedData.email }).sort({ updatedAt: -1 });
     
-    console.log("Contact form submitted and saved:", newContact);
+    const isVerified = existingContact?.isVerified || false;
+
+    let savedContact;
+
+    // If the latest entry is a placeholder from the verification flow, update it instead of creating a new one
+    if (existingContact && existingContact.name === "Verify Pending") {
+        savedContact = await Contact.findByIdAndUpdate(
+            existingContact._id,
+            { 
+                ...validatedData,
+                isVerified 
+            },
+            { new: true }
+        );
+        console.log("Updated placeholder contact:", savedContact?._id);
+    } else {
+        // Otherwise, create a new contact entry (keeping history of previous valid submissions)
+        savedContact = await Contact.create({
+            ...validatedData,
+            isVerified
+        });
+        console.log("Created new contact:", savedContact._id);
+    }
 
     return NextResponse.json(
       { message: "Thank you! We have received your message and will get back to you shortly." },
