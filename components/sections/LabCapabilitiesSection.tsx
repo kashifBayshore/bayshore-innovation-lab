@@ -247,7 +247,7 @@ const LabCapabilitiesSection: React.FC = () => {
                                     boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.05)",
                                     display: "flex",
                                     alignItems: "center",
-                                    justifyContent: "flex-start",
+                                    justifyContent: "center",
                                     padding: "0 20px",
                                     border: `1px solid ${figmaColors.borderLight}`,
                                     cursor: 'default',
@@ -256,7 +256,7 @@ const LabCapabilitiesSection: React.FC = () => {
                                 }}
                                 className="hover:scale-105 transition-transform duration-300"
                                 >
-                                    <Text size="sm" weight="medium" style={{ fontSize: "14px", color: figmaColors.textPrimary }}>
+                                    <Text size="sm" weight="medium" style={{ fontSize: "14px", color: figmaColors.textPrimary, textAlign: "center" }}>
                                         {cap.title}
                                     </Text>
                                 </div>
