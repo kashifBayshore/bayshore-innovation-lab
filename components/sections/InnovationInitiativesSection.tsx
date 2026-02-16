@@ -196,6 +196,7 @@ const InnovationInitiativesSection: React.FC = () => {
                       {item.title}
                     </h3>
                     <p
+                      className="innovation-description max-w-none lg:max-w-[540px]"
                       style={{
                         fontFamily: figmaTypography.fontFamily.openSans.join(", "),
                         fontSize: "18px",
@@ -203,7 +204,6 @@ const InnovationInitiativesSection: React.FC = () => {
                         color: figmaColors.textSecondary,
                         margin: 0,
                       }}
-                      className="max-w-none lg:max-w-[540px]"
                     >
                       {item.description}
                     </p>
@@ -239,6 +239,22 @@ const InnovationInitiativesSection: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* MOBILE-ONLY STYLES - Full-width descriptions */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        @media (max-width: 768px) {
+          .innovation-description {
+            width: 100vw !important;
+            max-width: 100vw !important;
+            margin-left: calc(-50vw + 50%) !important;
+            margin-right: calc(-50vw + 50%) !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            box-sizing: border-box !important;
+            text-align: center !important;
+          }
+        }
+      `}} />
     </Section>
   );
 };
