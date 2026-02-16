@@ -11,7 +11,7 @@ export const Mission: React.FC = () => {
         style={{ 
           maxWidth: figmaSpacing.container.full, 
           margin: "0 auto", 
-          padding: "0px 10px" 
+          padding: "0 20px" 
         }}
       >
         <div style={{ textAlign: "center", width: "100%", margin: "0 auto" }}>
