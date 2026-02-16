@@ -64,96 +64,94 @@ const InnovationInitiativesSection: React.FC = () => {
           display: "flex",
           position: "relative",
           zIndex: 1,
-          gap: "40px",
         }}
-        className="flex-col lg:flex-row items-center min-h-[450px]"
+        className="flex-col lg:flex-row items-center min-h-[450px] gap-0 lg:gap-10"
       >
-        {/* Left Side - Image Container */}
-        <div
-          style={{
-            flex: "1",
-            display: "flex",
-            justifyContent: "flex-start",
-            alignItems: "center",
-            width: "100%",
-            position: "relative",
-          }}
-          className="order-2 lg:order-1 h-[300px] lg:h-full"
-        >
+          {/* Left Side - Image Container */}
           <div
             style={{
-              position: "absolute",
-              width: "100%",
-              maxWidth: "650px",
-              height: "clamp(300px, 40vw, 600px)",
-              top: "50%",
-              left: 0,
-              transform: "translateY(-50%)",
-            }}
-          >
-            <Image
-              src="/Group 408.svg"
-              alt="Innovation Graphic"
-              fill
-              style={{ objectFit: "contain", objectPosition: "left center" }}
-              unoptimized
-            />
-          </div>
-        </div>
-
-        {/* Right Side - Content Container */}
-        <div
-          style={{
-            flex: "1",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            zIndex: 10,
-          }}
-          className="order-1 lg:order-2 px-4 lg:px-0 lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:w-full h-auto lg:h-full py-10 lg:py-0"
-        >
-          {/* Unified Content Block */}
-          <div
-            style={{
+              flex: "1",
               display: "flex",
-              flexDirection: "column",
-              gap: "40px",
+              justifyContent: "flex-start",
               alignItems: "center",
-              textAlign: "center",
-              maxWidth: "600px",
               width: "100%",
+              position: "relative",
             }}
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
+            className="order-2 lg:order-1 w-full aspect-square lg:aspect-auto lg:h-full rotate-90 scale-x-[-1] lg:rotate-0 lg:scale-x-100 -mt-20 lg:mt-0"
           >
-            {/* Main Heading */}
-            <Heading
-              level={2}
-              gradient
-              centered
-              style={{
-                fontSize: "clamp(28px, 4vw, 56px)",
-                lineHeight: "1.1",
-                margin: 0,
-              }}
-              className="whitespace-normal lg:whitespace-nowrap"
-            >
-              Innovation Initiatives
-            </Heading>
-
-            {/* Carousel Content */}
             <div
               style={{
-                position: "relative",
+                position: "absolute",
                 width: "100%",
-                height: "180px", // Fixed height
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "flex-start",
-                perspective: "1000px", // Adds 3D depth for the flip
+                maxWidth: "650px",
+                height: "clamp(300px, 40vw, 600px)",
+                top: "50%",
+                left: 0,
+                transform: "translateY(-50%)",
               }}
             >
+              <Image
+                src="/Group 408.svg"
+                alt="Innovation Graphic"
+                fill
+                style={{ objectFit: "contain", objectPosition: "left center" }}
+                unoptimized
+              />
+            </div>
+          </div>
+
+          {/* Right Side - Content Container */}
+          <div
+            style={{
+              flex: "1",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              zIndex: 10,
+            }}
+            className="order-1 lg:order-2 px-4 lg:px-0 lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:w-full h-auto lg:h-full pt-4 pb-0 lg:py-0"
+          >
+            {/* Unified Content Block */}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                textAlign: "center",
+                width: "100%",
+              }}
+              onMouseEnter={() => setIsPaused(true)}
+              onMouseLeave={() => setIsPaused(false)}
+              className="w-full lg:max-w-[600px] gap-4 lg:gap-10"
+            >
+              {/* Main Heading */}
+              <Heading
+                level={2}
+                gradient
+                centered
+                style={{
+                  fontSize: "clamp(28px, 4vw, 56px)",
+                  lineHeight: "1.1",
+                  margin: 0,
+                }}
+                className="whitespace-normal lg:whitespace-nowrap"
+              >
+                Innovation Initiatives
+              </Heading>
+
+              {/* Carousel Content */}
+              <div
+                style={{
+                  position: "relative",
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "flex-start",
+                  perspective: "1000px", // Adds 3D depth for the flip
+                }}
+                className="h-[90px] sm:h-[180px]"
+              >
               {initiatives.map((item, index) => {
                 const isActive = activeIndex === index;
                 // Determine if this item is "next" (coming in) or "previous" (going out) 
@@ -187,11 +185,13 @@ const InnovationInitiativesSection: React.FC = () => {
                     <h3
                       style={{
                         fontFamily: figmaTypography.fontFamily.openSans.join(", "),
-                        fontSize: "28px",
+                        fontSize: "clamp(18px, 5vw, 28px)",
                         fontWeight: figmaTypography.fontWeight.bold,
                         color: figmaColors.textPrimary,
                         margin: 0,
+                        whiteSpace: "nowrap",
                       }}
+                      className="w-full text-ellipsis overflow-hidden px-1"
                     >
                       {item.title}
                     </h3>
@@ -202,8 +202,8 @@ const InnovationInitiativesSection: React.FC = () => {
                         lineHeight: "1.6",
                         color: figmaColors.textSecondary,
                         margin: 0,
-                        maxWidth: "540px",
                       }}
+                      className="max-w-none lg:max-w-[540px]"
                     >
                       {item.description}
                     </p>
@@ -214,11 +214,7 @@ const InnovationInitiativesSection: React.FC = () => {
 
             {/* Indicators */}
             <div
-              style={{
-                display: "flex",
-                gap: "12px",
-                marginTop: "10px",
-              }}
+              className="hidden lg:flex gap-3 mt-2.5"
             >
               {initiatives.map((_, index) => (
                 <button

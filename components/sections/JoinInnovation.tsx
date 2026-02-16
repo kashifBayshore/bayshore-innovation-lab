@@ -19,6 +19,7 @@ export const JoinInnovation: React.FC = () => {
         style={{ 
             maxWidth: figmaSpacing.container.full, 
             margin: '0 auto',
+            padding: '0 20px',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',

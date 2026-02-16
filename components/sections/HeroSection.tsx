@@ -89,7 +89,7 @@ export const HeroSection: React.FC = () => {
             </div>
 
             {/* Heading and Body */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "24px", paddingTop: "20px" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "24px", paddingTop: "20px" }} className="pt-[280px] md:pt-5">
                 <h1
                   style={{
                     fontFamily: figmaTypography.fontFamily.openSans.join(", "),
@@ -146,7 +146,7 @@ export const HeroSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Content - Visual - Group 421.svg with Ellipse 2 (2).svg Background */}
+          {/* Right Content - Visual - DESKTOP/TABLET ONLY */}
           <div
             style={{
               position: "relative",
@@ -158,7 +158,7 @@ export const HeroSection: React.FC = () => {
               justifyContent: "center",
               alignItems: "center",
             }}
-            className="pt-10 md:pt-0 landscape:pt-4"
+            className="hidden md:flex pt-10 md:pt-0 landscape:pt-4"
           >
 
             {/* Background Ellipse - Centered behind the visual */}
@@ -213,13 +213,9 @@ export const HeroSection: React.FC = () => {
             right: "6px", // Matches figmaSpacing.positioning.logoLeft for symmetry
             top: "50%",
             transform: "translateY(-50%)",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "24px",
             zIndex: 50,
           }}
-          className="hidden xl:flex" // Only visible on large desktop
+          className="hidden xl:flex flex-col items-center gap-6" // Only visible on large desktop
         >
           {/* Social Links */}
           <div style={{ display: "flex", flexDirection: "column", gap: "20px", alignItems: "center" }}>

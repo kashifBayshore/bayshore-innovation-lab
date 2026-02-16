@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { Heading } from "@/components/ui/Heading";
 import { Text } from "@/components/ui/Text";
@@ -36,8 +38,33 @@ const products = [
 ];
 
 export const OurProductsSection: React.FC = () => {
+    const scrollRef = useRef<HTMLDivElement>(null);
+    const [activeIndex, setActiveIndex] = useState(0);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (scrollRef.current) {
+                const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+                 // Calculate index based on scroll percentage relative to total scrollable width
+                 // The center of the view is scrollLeft + clientWidth / 2
+                 // We want to find which item's center is closest to that.
+                 // Detailed match:
+                 const totalScrollableWidth = scrollWidth - clientWidth; 
+                 // Simple approximation for equal width items
+                 const index = Math.round((scrollLeft / totalScrollableWidth) * (products.length - 1));
+                 setActiveIndex(Math.min(Math.max(index, 0), products.length - 1));
+            }
+        };
+
+        const ref = scrollRef.current;
+        if (ref) {
+            ref.addEventListener('scroll', handleScroll);
+            return () => ref.removeEventListener('scroll', handleScroll);
+        }
+    }, []);
+
   return (
-    <Section background={figmaColors.backgroundPrimary} size="md">
+    <Section background={figmaColors.backgroundPrimary} size="md" className="pb-5">
       <div
         style={{
           maxWidth: figmaSpacing.container.full,
@@ -51,7 +78,8 @@ export const OurProductsSection: React.FC = () => {
         </Heading>
 
         <div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[repeat(20,minmax(0,1fr))] gap-[30px]"
+          ref={scrollRef}
+          className="flex flex-nowrap overflow-x-auto snap-x snap-mandatory pb-8 -mx-5 px-5 md:grid md:overflow-visible md:mx-0 md:px-0 md:pb-0 md:grid-cols-2 lg:grid-cols-[repeat(20,minmax(0,1fr))] gap-[20px] md:gap-[30px] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
         >
           {products.map((product, index) => {
             // Layout Logic:
@@ -64,7 +92,7 @@ export const OurProductsSection: React.FC = () => {
 
               <div
                 key={index}
-                className={colSpanClass}
+                className={`${colSpanClass} flex-shrink-0 w-[85vw] sm:w-[350px] snap-center md:w-auto`}
                 style={{
                   backgroundColor: figmaColors.backgroundWhite,
                   borderRadius: "20px",
@@ -153,6 +181,23 @@ export const OurProductsSection: React.FC = () => {
           );
         })}
         </div>
+
+        {/* Mobile Scroll Dots */}
+        <div className="flex md:hidden justify-center gap-2 mt-0">
+            {products.map((_, i) => (
+            <div 
+                key={i}
+                style={{
+                width: i === activeIndex ? "24px" : "8px",
+                height: "8px",
+                borderRadius: "4px",
+                backgroundColor: i === activeIndex ? figmaColors.accentCyan : "#E3E3E3",
+                transition: "all 0.3s ease"
+                }}
+            />
+            ))}
+        </div>
+
       </div>
     </Section>
   );

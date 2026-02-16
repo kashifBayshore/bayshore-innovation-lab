@@ -48,7 +48,7 @@ const ResearchAreasSection: React.FC = () => {
   ];
 
   return (
-    <Section background={figmaColors.backgroundWhite} size="md" style={{ position: "relative", overflow: "visible" }}>
+    <Section background={figmaColors.backgroundPrimary} size="md" style={{ position: "relative", overflow: "visible" }} className="pt-10 pb-10 md:py-24">
       <div
         style={{
           maxWidth: figmaSpacing.container.full,
@@ -57,13 +57,9 @@ const ResearchAreasSection: React.FC = () => {
         }}
       >
         {/* Heading Area with Decorative Stepped Line */}
-        <div style={{ 
-          marginBottom: "64px", 
-          display: "flex", 
-          alignItems: "center", 
-          gap: "0px",
-          width: "100%"
-        }}>
+        <div 
+          className="mb-8 md:mb-16 flex items-center gap-0 w-full"
+        >
           <Heading 
             level={2} 
             gradient 
@@ -120,7 +116,7 @@ const ResearchAreasSection: React.FC = () => {
         </div>
 
         <div
-          className="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-20"
+          className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-x-20 md:gap-y-20"
           style={{
             width: "100%",
           }}
@@ -128,13 +124,10 @@ const ResearchAreasSection: React.FC = () => {
           {researchAreas.map((area, index) => (
             <div
               key={index}
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "16px",
-              }}
+              className="flex flex-row md:flex-col gap-4"
             >
               <div
+                className="flex-shrink-0"
                 style={{
                   width: "56px",
                   height: "56px",

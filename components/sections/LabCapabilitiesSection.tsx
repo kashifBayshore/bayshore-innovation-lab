@@ -153,16 +153,15 @@ const LabCapabilitiesSection: React.FC = () => {
               transform: isSectionVisible ? 'translateX(0)' : 'translateX(-20px)',
               transition: 'opacity 0.8s ease-out, transform 0.8s ease-out',
               position: "relative",
-              top: "80px", // Pushes the text block down so Heading aligns with Center Dot
             }}
-            className="mb-10 lg:mb-0 text-center lg:text-left w-full lg:w-auto lg:flex-1 lg:mr-[20px]"
+            className="mb-8 lg:mb-0 text-center lg:text-left w-full lg:w-auto lg:flex-1 lg:mr-[20px] lg:top-[80px]"
         >
 
-            <Heading level={2} gradient style={{ marginBottom: "20px" }} className="whitespace-normal lg:whitespace-nowrap">
+            <Heading level={2} gradient style={{ marginBottom: "16px" }} className="whitespace-normal lg:whitespace-nowrap">
                 Lab Capabilities
             </Heading>
 
-            <Text size="sm" color="secondary" style={{ width: "100%", maxWidth: "100%", lineHeight: "1.6", margin: "0 auto md:0" }}>
+            <Text size="sm" color="secondary" style={{ width: "100%", maxWidth: "100%", lineHeight: "1.7", margin: "0 auto lg:0" }}>
                 Our lab is equipped with state-of-the-art infrastructure designed to support complex research and development cycles. From high-performance computing clusters to secure sandboxes for experimentation, we provide the environment necessary to turn ambitious concepts into functional prototypes.
             </Text>
         </div>
@@ -267,27 +266,81 @@ const LabCapabilitiesSection: React.FC = () => {
             </div>
         </div>
 
-        {/* Mobile & Tablet View: Stacked or 2-column Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:hidden gap-4 mt-8 w-full max-w-4xl mx-auto">
-            {capabilities.map((cap, i) => (
-                 <div key={i} style={{
-                     width: "100%",
-                     minHeight: "68px",
-                     backgroundColor: figmaColors.backgroundWhite,
-                     borderRadius: "12px",
-                     boxShadow: figmaColors.cardShadow,
-                     display: "flex",
-                     alignItems: "center",
-                     justifyContent: "center",
-                     padding: "12px 20px",
-                     border: `1px solid ${figmaColors.borderLight}`,
-                     opacity: areCardsVisible ? 1 : 0,
-                     transform: areCardsVisible ? 'translateY(0)' : 'translateY(20px)',
-                     transition: `opacity 0.6s ease-out ${0.2 + (i * 0.1)}s, transform 0.6s ease-out ${0.2 + (i * 0.1)}s`
-                 }}>
-                     <Text size="sm" weight="medium" style={{ textAlign: "center", fontSize: "14px" }}>{cap.title}</Text>
-                 </div>
-            ))}
+        {/* Mobile & Tablet View: Enterprise-Level Responsive Design */}
+        <div className="lg:hidden w-full mt-10">
+            {/* Mobile: Single column, Tablet: 2 columns */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 w-full">
+                {capabilities.map((cap, i) => (
+                    <div 
+                        key={i} 
+                        style={{
+                            width: "100%",
+                            minHeight: "80px",
+                            backgroundColor: figmaColors.backgroundWhite,
+                            borderRadius: "16px",
+                            boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.04), 0px 8px 24px rgba(0, 0, 0, 0.08)",
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            padding: "16px 20px",
+                            border: `1px solid ${figmaColors.borderLight}`,
+                            position: "relative",
+                            overflow: "hidden",
+                            opacity: areCardsVisible ? 1 : 0,
+                            transform: areCardsVisible ? 'translateY(0) scale(1)' : 'translateY(30px) scale(0.95)',
+                            transition: `
+                                opacity 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) ${0.1 + (i * 0.08)}s, 
+                                transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) ${0.1 + (i * 0.08)}s,
+                                box-shadow 0.3s ease-out
+                            `,
+                        }}
+                        className="hover:shadow-xl active:scale-[0.98] transition-all duration-300"
+                    >
+                        {/* Gradient Accent Line */}
+                        <div 
+                            style={{
+                                position: "absolute",
+                                top: 0,
+                                left: 0,
+                                right: 0,
+                                height: "3px",
+                                background: `linear-gradient(90deg, ${figmaColors.accentCyan}, ${figmaColors.accentOrange})`,
+                                opacity: 0.8,
+                            }}
+                        />
+                        
+                        {/* Card Content */}
+                        <Text 
+                            size="sm" 
+                            weight="medium" 
+                            style={{ 
+                                textAlign: "center", 
+                                fontSize: "15px",
+                                lineHeight: "1.5",
+                                color: figmaColors.textPrimary,
+                                fontWeight: "600",
+                            }}
+                        >
+                            {cap.title}
+                        </Text>
+                        
+                        {/* Subtle Background Pattern */}
+                        <div
+                            style={{
+                                position: "absolute",
+                                bottom: "-10px",
+                                right: "-10px",
+                                width: "60px",
+                                height: "60px",
+                                borderRadius: "50%",
+                                background: `radial-gradient(circle, ${figmaColors.accentCyan}15, transparent 70%)`,
+                                pointerEvents: "none",
+                            }}
+                        />
+                    </div>
+                ))}
+            </div>
         </div>
 
 
