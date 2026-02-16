@@ -19,7 +19,7 @@ const products = [
     title: "Gesture Arcade",
     description:
       "AI-powered gesture-based arcade game where players can slice and interact with flying objects using real-time finger tracking through the camera. Powered by computer vision and AI, it delivers a touch-free, immersive gaming experience with fast-paced action, smooth hand-movement controls, and engaging gameplay.",
-    link: "#",
+    link: "https://bayshoreintel.itch.io/ninjacam-slicer",
   },
   {
     title: "Bayshore Resume Builder",
@@ -111,7 +111,9 @@ export const OurProductsSection: React.FC = () => {
                 color="secondary"
                 style={{ lineHeight: "1.6" }}
               >
-                {product.description}
+                {product.description.length > 285 
+                  ? `${product.description.substring(0, 285)}...` 
+                  : product.description}
               </Text>
 
               <a
