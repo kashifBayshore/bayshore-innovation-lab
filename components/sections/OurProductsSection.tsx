@@ -10,28 +10,28 @@ const PRODUCT_ICON = "/Mapping search.svg";
 
 const products = [
   {
-    title: "Precision Mapping AI",
+    title: "ShapeUp",
     description:
-      "Advanced geospatial analysis tool that leverages machine learning to create high-fidelity maps for urban planning and environmental monitoring.",
-    link: "https://mappingresearch.com/precision",
+      "A modern fitness tracking app designed to help users achieve their health goals efficiently. It allows users to track their weight progress, monitor their daily calorie intake with time-wise logging, and get a personalized diet plan based on their body goals. The app provides an easy-to-use interface for maintaining daily fitness routines and improving overall lifestyle through structured nutrition guidance.",
+    link: "#", // Placeholder
   },
   {
-    title: "EcoSmart Solutions",
+    title: "Gesture Arcade",
     description:
-      "A comprehensive suite of IoT-driven sensors and analytical platforms designed to optimize energy consumption and reduce the carbon footprint of industrial facilities.",
-    link: "https://mappingresearch.com/ecosmart",
+      "AI-powered gesture-based arcade game where players can slice and interact with flying objects using real-time finger tracking through the camera. Powered by computer vision and AI, it delivers a touch-free, immersive gaming experience with fast-paced action, smooth hand-movement controls, and engaging gameplay.",
+    link: "#",
   },
   {
-    title: "CyberShield Research",
+    title: "Bayshore Resume Builder",
     description:
-      "Next-generation cybersecurity framework utilizing agentic AI to detect and mitigate zero-day vulnerabilities across distributed cloud networks.",
-    link: "https://mappingresearch.com/cybershield",
+      "A fully responsive, AI-powered web application that enables users to create professional, ATS-optimized resumes tailored to specific job descriptions through a guided multi-step interface with real-time previews. It features AI-driven content enhancement, multiple professionally designed templates, a centralized dashboard to manage and update resumes, high-quality PDF export, and shareable resume links, delivering a seamless end-to-end resume creation experience across desktop, tablet, and mobile devices.",
+    link: "http://15.207.98.138/",
   },
   {
-    title: "Quantum Insight Engine",
+    title: "Mapping Research",
     description:
-      "A hybrid quantum-classical computing platform for solving complex optimization problems in logistics and large-scale data processing.",
-    link: "https://mappingresearch.com/quantum",
+      "A comprehensive research platform dedicated to advanced geospatial analysis and mapping technologies. It provides tools for high-fidelity data visualization, environmental monitoring, and urban planning, enabling users to derive actionable insights from complex spatial data.",
+    link: "https://mappingresearch.com/",
   },
 ];
 
@@ -54,9 +54,10 @@ export const OurProductsSection: React.FC = () => {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[repeat(20,minmax(0,1fr))] gap-[30px]"
         >
           {products.map((product, index) => {
-            // Alternating pattern for Desktop (lg+): 
-            // 20-column grid allows for 45/55 split (9/20 and 11/20)
-            // Card 1: 9 cols, Card 2: 11 cols, Card 3: 11 cols, Card 4: 9 cols
+            // Layout Logic:
+            // Row 1: ShapeUp (9) + Gesture Arcade (11)
+            // Row 2: Resume Builder (11) + Mapping Research (9)
+            // This creates a balanced, alternating layout.
             const colSpanClass = (index === 0 || index === 3) ? "lg:col-span-[9]" : "lg:col-span-[11]";
             
             return (
@@ -115,6 +116,8 @@ export const OurProductsSection: React.FC = () => {
 
               <a
                 href={product.link}
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{
                   color: figmaColors.accentCyan,
                   textDecoration: "none",
