@@ -55,13 +55,13 @@ export const HeroSection: React.FC = () => {
         }}
       >
         <div
+          className="hero-grid-container grid-cols-1 md:grid-cols-2 text-center md:text-left"
           style={{
             display: "grid",
             gridTemplateColumns: "1.4fr 1fr", // Increased space for left content
             gap: "40px",
             alignItems: "flex-start", // Align visual with logo at the top
           }}
-          className="grid-cols-1 md:grid-cols-2 text-center md:text-left"
         >
           {/* Left Content Column */}
           <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
@@ -109,6 +109,7 @@ export const HeroSection: React.FC = () => {
 
 
                 <div
+                  className="hero-subtitle-container"
                   style={{
                     fontFamily: figmaTypography.fontFamily.openSans.join(", "),
                     fontSize: figmaTypography.fontSize.lg,
@@ -154,7 +155,6 @@ export const HeroSection: React.FC = () => {
               aspectRatio: "1/1",
               maxWidth: "600px",
               margin: "0 auto",
-              display: "flex",
               justifyContent: "center",
               alignItems: "center",
             }}
@@ -278,6 +278,80 @@ export const HeroSection: React.FC = () => {
           `}} />
         </div>
       </div>
+      
+      {/* MOBILE-ONLY STYLES - ENTERPRISE-LEVEL RESPONSIVE DESIGN */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        /* Mobile-specific overrides for professional layout */
+        @media (max-width: 768px) {
+          /* Hero section background setup */
+          section:has(.hero-grid-container) {
+            position: relative;
+            overflow: hidden;
+          }
+          
+          /* Hero image as background - positioned at top */
+          section:has(.hero-grid-container)::before {
+            content: "";
+            position: absolute;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120%;
+            max-width: 500px;
+            height: 450px;
+            background-image: url('/Group 421.svg');
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center top;
+            opacity: 0.28;
+            z-index: 0;
+            pointer-events: none;
+          }
+          
+          /* Subtle gradient overlay for better text readability */
+          section:has(.hero-grid-container)::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 450px;
+            background: linear-gradient(
+              to bottom,
+              rgba(247, 249, 250, 0) 0%,
+              rgba(247, 249, 250, 0.3) 50%,
+              rgba(247, 249, 250, 0.7) 100%
+            );
+            z-index: 0;
+            pointer-events: none;
+          }
+          
+          /* Single column grid with proper layering */
+          .hero-grid-container {
+            grid-template-columns: 1fr !important;
+            gap: 24px !important;
+            text-align: left !important;
+            position: relative;
+            z-index: 2;
+            padding-top: 0 !important;
+          }
+          
+          /* Enterprise-level full-width subtitle - Transparent */
+          .hero-subtitle-container {
+            width: 100vw !important;
+            max-width: 100vw !important;
+            margin-left: calc(-50vw + 50%) !important;
+            margin-right: calc(-50vw + 50%) !important;
+            padding-left: 20px !important;
+            padding-right: 20px !important;
+            padding-top: 12px !important;
+            padding-bottom: 12px !important;
+            box-sizing: border-box !important;
+            position: relative;
+            z-index: 3;
+          }
+        }
+      `}} />
       
       {/* Modal Integration */}
       <Modal 
