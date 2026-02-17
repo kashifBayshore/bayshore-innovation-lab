@@ -6,6 +6,14 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { figmaColors } from "@/tokens/figma-design";
 
+// --- Enterprise Configuration (Shared Pattern) ---
+const BAYSHORE_API_BASE_URL = process.env.NEXT_PUBLIC_BAYSHORE_API_URL;
+const BAYSHORE_API_KEY = process.env.NEXT_PUBLIC_BAYSHORE_API_KEY;
+
+if (!BAYSHORE_API_BASE_URL) {
+  console.error("CRITICAL: NEXT_PUBLIC_BAYSHORE_API_URL is missing in NewsletterForm.");
+}
+
 export const NewsletterForm: React.FC = () => {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -19,30 +27,43 @@ export const NewsletterForm: React.FC = () => {
     setStatus("loading");
     setMessage("");
 
+    if (!BAYSHORE_API_BASE_URL) {
+        setStatus("error");
+        setMessage("System Error: API URL missing");
+        return;
+    }
+
     try {
-      const res = await fetch("/api/newsletter", {
+      const headers: HeadersInit = { "Content-Type": "application/json" };
+      if (BAYSHORE_API_KEY) headers["x-api-key"] = BAYSHORE_API_KEY;
+
+      const res = await fetch(`${BAYSHORE_API_BASE_URL}/api/newsLetter`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers,
         body: JSON.stringify({ email }),
       });
 
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.message || "Something went wrong");
+        if (res.status === 409) {
+            throw new Error("You are already subscribed!");
+        }
+        throw new Error(data.message || "Failed to subscribe");
       }
 
       setStatus("success");
-      setMessage(data.message);
-      // Don't clear email on success so user sees what they subscribed with, but can clear if desired.
-      // Or clear it? Let's keep it but disabled.
+      setMessage(data.message || "Successfully subscribed!");
+      setEmail(""); // Clear input on success
+      
     } catch (error: any) {
       setStatus("error");
-      setMessage(error.message || "An error occurred.");
+      setMessage(error.message || "An error occurred. Please try again.");
     } finally {
-      if (status !== "success") {
-        setStatus("idle"); 
-      }
+        // If success, keep success state, otherwise idle
+        if (status !== "success") {
+             // We don't reset to idle immediately if error to show the message
+        }
     }
   };
 
