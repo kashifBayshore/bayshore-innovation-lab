@@ -11,6 +11,8 @@ import 'react-phone-number-input/style.css'
 // @ts-ignore
 import PhoneInput, { parsePhoneNumber, isValidPhoneNumber } from 'react-phone-number-input'
 
+const BAYSHORE_API_BASE_URL = process.env.NEXT_PUBLIC_BAYSHORE_API_URL || "http://localhost:3001";
+
 export const ContactForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) => {
   const [formData, setFormData] = useState<ContactFormData>({
     name: "",
@@ -62,23 +64,7 @@ export const ContactForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess })
     setOtpError(null);
 
     try {
-        // Step 1: Check if already verified
-        const checkRes = await fetch("/api/check-email-verified", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email: formData.email }),
-        });
-        const checkData = await checkRes.json();
-
-        if (checkData.success && checkData.data.isVerified) {
-            setIsEmailVerified(true);
-            setIsVerifyingEmail(false);
-            return;
-        }
-
-        // Step 2: Send OTP
         await sendOtp();
-        
     } catch (error: any) {
         setOtpError(error.message);
     } finally {
@@ -87,7 +73,7 @@ export const ContactForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess })
   };
 
   const sendOtp = async () => {
-        const sendRes = await fetch("/api/send-email-otp", {
+        const sendRes = await fetch(`${BAYSHORE_API_BASE_URL}/api/send-email-otp`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email: formData.email }),
@@ -96,6 +82,12 @@ export const ContactForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess })
 
         if (!sendData.success) {
             throw new Error(sendData.message || "Failed to send OTP");
+        }
+
+        if (sendData.isAlreadyVerified) {
+             setIsEmailVerified(true);
+             setIsVerifyingEmail(false);
+             return;
         }
 
         setOtpSent(true);
@@ -122,7 +114,7 @@ export const ContactForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess })
     setIsVerifyingEmail(true);
     setOtpError(null);
     try {
-        const res = await fetch("/api/verify-email-otp", {
+        const res = await fetch(`${BAYSHORE_API_BASE_URL}/api/verify-email-otp`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email: formData.email, otp }),
@@ -198,7 +190,8 @@ export const ContactForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess })
     }
 
     try {
-      const response = await fetch("/api/contact", {
+      // Use contactUsInTouch endpoint from Bayshore
+      const response = await fetch(`${BAYSHORE_API_BASE_URL}/api/contactUsInTouch`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
