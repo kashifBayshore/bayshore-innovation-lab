@@ -11,7 +11,66 @@ import 'react-phone-number-input/style.css'
 // @ts-ignore
 import PhoneInput, { parsePhoneNumber, isValidPhoneNumber } from 'react-phone-number-input'
 
-const BAYSHORE_API_BASE_URL = process.env.NEXT_PUBLIC_BAYSHORE_API_URL || "http://localhost:3001";
+// --- Enterprise Configuration ---
+const BAYSHORE_API_BASE_URL = process.env.NEXT_PUBLIC_BAYSHORE_API_URL;
+const BAYSHORE_API_KEY = process.env.NEXT_PUBLIC_BAYSHORE_API_KEY;
+
+// Strict Validation at Runtime (Fail Fast)
+if (!BAYSHORE_API_BASE_URL) {
+  console.error("CRITICAL: NEXT_PUBLIC_BAYSHORE_API_URL is missing. API calls will fail.");
+}
+
+/**
+ * Secure Fetch Wrapper
+ * Handles Auth Headers, Error Parsing, and Network Failures
+ */
+async function secureFetch(endpoint: string, body: any) {
+  if (!BAYSHORE_API_BASE_URL) throw new Error("System Configuration Error: API URL missing");
+
+  const url = `${BAYSHORE_API_BASE_URL}${endpoint}`;
+  
+  const headers: HeadersInit = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+  };
+
+  // Add API Key if configured (Recommended for Security)
+  if (BAYSHORE_API_KEY) {
+    headers["x-api-key"] = BAYSHORE_API_KEY;
+  }
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(body),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      // Handle Specific HTTP Errors
+      if (response.status === 401 || response.status === 403) {
+        throw new Error("Unauthorized: Please check your permission or refresh the page.");
+      }
+      if (response.status === 429) {
+        throw new Error("Too many requests. Please try again in a few minutes.");
+      }
+      if (response.status >= 500) {
+        throw new Error("Server error. Our team has been notified. Please try again later.");
+      }
+      throw new Error(data.message || data.error || `Request failed with status ${response.status}`);
+    }
+
+    return data;
+  } catch (error: any) {
+    // Network Errors (Offline, DNS, etc)
+    if (error.name === 'TypeError' && error.message === 'Failed to fetch') {
+      throw new Error("Network error. Please check your internet connection.");
+    }
+    throw error;
+  }
+}
 
 export const ContactForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) => {
   const [formData, setFormData] = useState<ContactFormData>({
@@ -73,15 +132,14 @@ export const ContactForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess })
   };
 
   const sendOtp = async () => {
-        const sendRes = await fetch(`${BAYSHORE_API_BASE_URL}/api/send-email-otp`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email: formData.email }),
+        // Uses secureFetch for consistent error handling and auth
+        const sendData = await secureFetch('/api/send-email-otp', { 
+            email: formData.email 
         });
-        const sendData = await sendRes.json();
 
         if (!sendData.success) {
-            throw new Error(sendData.message || "Failed to send OTP");
+            // Fallback if success flag is false but no error thrown
+            throw new Error(sendData.message || "Failed to send verification code.");
         }
 
         if (sendData.isAlreadyVerified) {
@@ -114,12 +172,10 @@ export const ContactForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess })
     setIsVerifyingEmail(true);
     setOtpError(null);
     try {
-        const res = await fetch(`${BAYSHORE_API_BASE_URL}/api/verify-email-otp`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email: formData.email, otp }),
+        const data = await secureFetch('/api/verify-email-otp', { 
+            email: formData.email, 
+            otp 
         });
-        const data = await res.json();
 
         if (data.success) {
             setIsEmailVerified(true);
@@ -177,31 +233,30 @@ export const ContactForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess })
     setIsSubmitting(true);
 
     // Format phone number with dash separation: +Code-Number
-    let payload = { ...formData };
+    let formattedPhone = formData.phone;
     if (formData.phone) {
         try {
             const parsed = parsePhoneNumber(formData.phone);
             if (parsed) {
-                payload.phone = `+${parsed.countryCallingCode}-${parsed.nationalNumber}`;
+                formattedPhone = `+${parsed.countryCallingCode}-${parsed.nationalNumber}`;
             }
         } catch (e) {
             console.error("Phone formatting error", e);
         }
     }
 
+    const payload = {
+        name: formData.name,
+        email: formData.email,
+        companyName: formData.company, // Renamed to match backend model
+        phoneNumber: formattedPhone,   // Renamed to match backend model
+        message: formData.message,
+        isEmailVerified: true          // Backend expects this flag
+    };
+
     try {
-      // Use contactUsInTouch endpoint from Bayshore
-      const response = await fetch(`${BAYSHORE_API_BASE_URL}/api/contactUsInTouch`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || "Something went wrong.");
-      }
+      // Use innovation-lab specific endpoint with secure wrapper
+      await secureFetch('/api/innovation-lab', payload);
 
       setSubmitSuccess(true);
       setFormData({ name: "", email: "", company: "", phone: "", message: "" }); // Reset form
@@ -209,8 +264,9 @@ export const ContactForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess })
       if (onSuccess) {
         setTimeout(onSuccess, 2000); // Close modal after success message
       }
-    } catch (error) {
-      setSubmitError(error instanceof Error ? error.message : "Failed to send message.");
+    } catch (error: any) {
+      console.error("Submission Error:", error);
+      setSubmitError(error.message || "Failed to send message. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
