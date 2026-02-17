@@ -51,10 +51,10 @@ const ResearchAreasSection: React.FC = () => {
     <Section background={figmaColors.backgroundPrimary} size="md" style={{ position: "relative", overflow: "visible" }} className="pt-10 pb-10 md:py-24">
       <div
         style={{
-          maxWidth: figmaSpacing.container.full,
+          maxWidth: "100%",
           margin: "0 auto",
-          padding: "0 20px",
         }}
+        className="px-5 lg:px-[120px]"
       >
         {/* Heading Area with Decorative Stepped Line */}
         <div 

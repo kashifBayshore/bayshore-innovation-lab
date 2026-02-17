@@ -9,10 +9,10 @@ export const Mission: React.FC = () => {
     <Section background="#F0F2F5" size="sm">
       <div 
         style={{ 
-          maxWidth: figmaSpacing.container.full, 
+          maxWidth: "100%", 
           margin: "0 auto", 
-          padding: "0 20px" 
         }}
+        className="px-5 lg:px-[120px]"
       >
         <div style={{ textAlign: "center", width: "100%", margin: "0 auto" }}>
           <h2

@@ -67,10 +67,10 @@ export const OurProductsSection: React.FC = () => {
     <Section background={figmaColors.backgroundPrimary} size="md" className="pb-5">
       <div
         style={{
-          maxWidth: figmaSpacing.container.full,
+          maxWidth: "100%",
           margin: "0 auto",
-          padding: "0 20px",
         }}
+        className="px-5 lg:px-[120px]"
       >
         {/* Gradient Heading */}
         <Heading level={2} gradient centered style={{ marginBottom: "40px" }}>
