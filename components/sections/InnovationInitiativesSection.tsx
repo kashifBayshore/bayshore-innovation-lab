@@ -58,14 +58,13 @@ const InnovationInitiativesSection: React.FC = () => {
     >
       <div
         style={{
-          maxWidth: figmaSpacing.container.full,
+          maxWidth: "100%",
           margin: "0 auto",
-          padding: "0 20px",
           display: "flex",
           position: "relative",
           zIndex: 1,
         }}
-        className="flex-col lg:flex-row items-center min-h-[450px] gap-0 lg:gap-10"
+        className="flex-col lg:flex-row items-center min-h-[450px] gap-0 lg:gap-10 px-5 lg:px-[120px]"
       >
           {/* Left Side - Image Container */}
           <div
@@ -77,7 +76,7 @@ const InnovationInitiativesSection: React.FC = () => {
               width: "100%",
               position: "relative",
             }}
-            className="order-2 lg:order-1 w-full aspect-square lg:aspect-auto lg:h-full rotate-90 scale-x-[-1] lg:rotate-0 lg:scale-x-100 -mt-20 lg:mt-0"
+            className="order-2 lg:order-1 w-full aspect-square lg:aspect-auto lg:h-full rotate-90 scale-x-[-1] lg:rotate-0 lg:scale-x-100 mt-2.5 lg:mt-0"
           >
             <div
               style={{
@@ -123,7 +122,7 @@ const InnovationInitiativesSection: React.FC = () => {
               }}
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
-              className="w-full lg:max-w-[600px] gap-4 lg:gap-10"
+              className="w-full lg:max-w-[600px] gap-2.5 lg:gap-10"
             >
               {/* Main Heading */}
               <Heading
@@ -150,7 +149,7 @@ const InnovationInitiativesSection: React.FC = () => {
                   alignItems: "flex-start",
                   perspective: "1000px", // Adds 3D depth for the flip
                 }}
-                className="h-[90px] sm:h-[180px]"
+                className="h-[-200px] sm:h-[-210px] "
               >
               {initiatives.map((item, index) => {
                 const isActive = activeIndex === index;
@@ -167,7 +166,7 @@ const InnovationInitiativesSection: React.FC = () => {
                       display: "flex",
                       flexDirection: "column",
                       alignItems: "center",
-                      gap: "16px",
+                      gap: "10px",
                       opacity: isActive ? 1 : 0,
                       // Rolodex / 3D Flip Effect
                       // Active: Flat and clear

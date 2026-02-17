@@ -17,14 +17,13 @@ export const Footer: React.FC = () => {
     >
       <div
         style={{
-          maxWidth: figmaSpacing.container.full,
+          maxWidth: "100%",
           margin: "0 auto",
-          padding: "0 20px",
           display: "grid",
           gap: "40px",
           marginBottom: "80px",
         }}
-        className="grid-cols-1 md:grid-cols-2 lg:grid-cols-4" 
+        className="grid-cols-1 md:grid-cols-2 lg:grid-cols-4 px-5 lg:px-[120px]" 
       >
 
         {/* Column 1: Logo & Desc */}
@@ -147,16 +146,15 @@ export const Footer: React.FC = () => {
 
         <div 
           style={{
-             maxWidth: figmaSpacing.container.full,
+             maxWidth: "100%",
              margin: "0 auto",
-             padding: "0 20px",
              display: "flex",
              justifyContent: "space-between",
              alignItems: "center",
              flexWrap: "wrap",
              gap: "20px"
           }}
-          className="justify-center sm:justify-between"
+          className="justify-center sm:justify-between px-5 lg:px-[120px]"
         >
             <Text size="xs" color="secondary">
                 © Copyright 2025. All Rights Reserved.

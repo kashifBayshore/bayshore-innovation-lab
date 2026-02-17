@@ -45,14 +45,14 @@ export const HeroSection: React.FC = () => {
       <div
         style={{
           width: "100%",
-          maxWidth: figmaSpacing.container.full,
+          maxWidth: "100%",
           margin: "0 auto",
-          padding: "0 20px", 
           position: "relative",
           zIndex: 10,
           display: "flex",
           flexDirection: "column",
         }}
+        className="px-5 lg:px-[120px]"
       >
         <div
           className="hero-grid-container grid-cols-1 md:grid-cols-2 text-center md:text-left"

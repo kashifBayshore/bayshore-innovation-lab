@@ -133,15 +133,14 @@ const LabCapabilitiesSection: React.FC = () => {
       <div
         ref={sectionRef}
         style={{
-          maxWidth: figmaSpacing.container.full,
+          maxWidth: "100%",
           margin: "0 auto",
-          padding: "0 20px",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
           position: "relative",
         }}
-        className="flex-col lg:flex-row h-auto lg:h-[500px]"
+        className="flex-col lg:flex-row h-auto lg:h-[500px] px-5 lg:px-[120px]"
       >
 
         {/* Left Content */}
@@ -247,7 +246,6 @@ const LabCapabilitiesSection: React.FC = () => {
                                     display: "flex",
                                     alignItems: "center",
                                     justifyContent: "center",
-                                    padding: "0 20px",
                                     border: `1px solid ${figmaColors.borderLight}`,
                                     cursor: 'default',
                                     animation: `float 4s ease-in-out infinite`,
